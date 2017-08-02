@@ -1,0 +1,201 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/enchant_frag1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kkk8888.bdosimulator.EnchantFirst">
+
+
+    <ImageView
+        android:id="@+id/basegear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/basegear" />
+
+    <ImageView
+        android:id="@+id/gear_helmet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/basegear"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="66dp"
+        android:layout_toLeftOf="@+id/gear_wea_awake"
+        android:layout_toStartOf="@+id/gear_wea_awake"
+        android:src="@drawable/ico_helmet" />
+
+    <ImageView
+        android:id="@+id/gear_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/gear_helmet"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
+        android:layout_toEndOf="@+id/gear_wea_awake"
+        android:layout_toRightOf="@+id/gear_wea_awake"
+        android:src="@drawable/ico_body" />
+
+    <ImageView
+        android:id="@+id/gear_ring1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gear_body"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_toEndOf="@+id/gear_body"
+        android:layout_toRightOf="@+id/gear_body"
+        android:src="@drawable/ico_ring" />
+
+    <ImageView
+        android:id="@+id/gear_ring2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gear_ring1"
+        android:layout_alignStart="@+id/gear_ring1"
+        android:layout_below="@+id/gear_ring1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/ico_ring" />
+
+    <ImageView
+        android:id="@+id/gear_glove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gear_ring2"
+        android:layout_alignStart="@+id/gear_ring2"
+        android:layout_below="@+id/gear_ring2"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/ico_gloves" />
+
+    <ImageView
+        android:id="@+id/gear_neck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gear_glove"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/gear_wea_second"
+        android:layout_toRightOf="@+id/gear_wea_second"
+        android:src="@drawable/ico_necklace" />
+
+    <ImageView
+        android:id="@+id/gear_wea_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gear_neck"
+        android:layout_toLeftOf="@+id/gear_ring1"
+        android:layout_toStartOf="@+id/gear_ring1"
+        android:src="@drawable/ico_weapon_secondary" />
+
+    <ImageView
+        android:id="@+id/gear_wea_awake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/gear_wea_pri"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ico_weapon_awake" />
+
+    <ImageView
+        android:id="@+id/gear_wea_pri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gear_helmet"
+        android:layout_alignStart="@+id/gear_helmet"
+        android:layout_below="@+id/gear_neck"
+        android:src="@drawable/ico_weapon_primary" />
+
+    <ImageView
+        android:id="@+id/gear_ear1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gear_helmet"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/gear_wea_pri"
+        android:layout_toStartOf="@+id/gear_wea_pri"
+        android:src="@drawable/ico_earring" />
+
+    <ImageView
+        android:id="@+id/gear_ear2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/gear_ear1"
+        android:layout_alignRight="@+id/gear_ear1"
+        android:layout_alignTop="@+id/gear_ring2"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ico_earring" />
+
+    <ImageView
+        android:id="@+id/shoe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gear_neck"
+        android:layout_alignLeft="@+id/gear_ear2"
+        android:layout_alignStart="@+id/gear_ear2"
+        android:src="@drawable/ico_shoes" />
+
+    <ImageView
+        android:id="@+id/belt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gear_wea_pri"
+        android:layout_toLeftOf="@+id/gear_wea_pri"
+        android:layout_toStartOf="@+id/gear_wea_pri"
+        android:src="@drawable/ico_belt" />
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/basegear"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/info_ratio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0"
+            android:textColor="#ffffff" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/searchBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:iconifiedByDefault="false"
+            android:visibility="invisible">
+
+        </android.support.v7.widget.SearchView>
+
+        <ListView
+            android:id="@+id/itemlist"
+            android:layout_width="170dp"
+            android:layout_height="230dp"
+            android:layout_below="@id/searchBtn"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"></ListView>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
