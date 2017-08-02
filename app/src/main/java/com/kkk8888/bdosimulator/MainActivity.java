@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         aQuery = new AQuery(this);
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
+        Toast.makeText(this, "gd", Toast.LENGTH_SHORT).show();
 
 
         // 카카오톡 로그인 버튼
