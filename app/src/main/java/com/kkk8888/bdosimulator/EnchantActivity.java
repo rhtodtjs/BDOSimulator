@@ -21,6 +21,8 @@ public class EnchantActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_enchant);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 

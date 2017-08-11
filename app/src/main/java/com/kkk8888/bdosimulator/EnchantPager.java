@@ -17,6 +17,7 @@ public class EnchantPager extends FragmentPagerAdapter {
 
     public EnchantPager(FragmentManager fm, String classType) {
         super(fm);
+
         Bundle bundle = new Bundle();
         bundle.putString("classType", classType); // putString(String key, String value)
 

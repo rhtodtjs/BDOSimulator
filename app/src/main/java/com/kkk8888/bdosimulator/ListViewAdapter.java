@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    ArrayList<String> listitem;
+    ArrayList<SearchItem> listitem;
     Context mContext;
 
-    public ListViewAdapter(ArrayList<String> listitem, Context mContext) {
+    public ListViewAdapter(ArrayList<SearchItem> listitem, Context mContext) {
         this.listitem = listitem;
         this.mContext = mContext;
     }
@@ -48,7 +48,7 @@ public class ListViewAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(mContext).inflate(R.layout.listview_item, parent, false);
 
         TextView tv = (TextView) convertView.findViewById(R.id.item_name);
-        tv.setText(listitem.get(position));
+        tv.setText(listitem.get(position).itemName);
 
 
 
