@@ -7,9 +7,11 @@ package com.kkk8888.bdosimulator;
 public class EnchantItem {
 
     private String itemType = "";
+
+
     private String imgUrl = "";
-    private String tableName = "";
-    private String subType = "";
+    private String tableName = ""; // (방어구 , 악세 , 무기)
+    private String subType = ""; //아이템 종류 (GREATSWORD , IRONGLOVE ..)
 
     private int grade = 0; // 아이템의 등급..녹템 초템 파템
     private int maxGrade = 0; //아이템의 최대 강화 단계..
@@ -19,91 +21,99 @@ public class EnchantItem {
     private int baseAp = 0; // 아이템의 베이스 공격력..
 
     int idForSelect = 0;
+    private int itemId = 0;
 
+    public int getItemId() {
+        return itemId;
+    }
 
-    private String getSubType() {
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getSubType() {
         return subType;
     }
 
-    private void setSubType(String subType) {
+    public void setSubType(String subType) {
         this.subType = subType;
     }
 
-    private int getBaseAp() {
+    public int getBaseAp() {
         return baseAp;
 
     }
 
-    private void setBaseAp(int baseAp) {
+    public void setBaseAp(int baseAp) {
         this.baseAp = baseAp;
     }
 
 
-    private String getTableName() {
+    public String getTableName() {
         return tableName;
     }
 
-    private void setTableName(String tableName) {
+    public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
-    private int getNowGrade() {
+    public int getNowGrade() {
         return nowGrade;
     }
 
-    private void setNowGrade(int nowGrade) {
+    public void setNowGrade(int nowGrade) {
         this.nowGrade = nowGrade;
     }
 
-    private String getItemType() {
+    public String getItemType() {
         return itemType;
     }
 
-    private void setItemType(String itemType) {
+    public void setItemType(String itemType) {
         this.itemType = itemType;
     }
 
-    private String getImgUrl() {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    private void setImgUrl(String imgUrl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
-    private int getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    private void setGrade(int grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 
-    private int getMaxGrade() {
+    public int getMaxGrade() {
         return maxGrade;
     }
 
-    private void setMaxGrade(int maxGrade) {
+    public void setMaxGrade(int maxGrade) {
         this.maxGrade = maxGrade;
     }
 
-    private int getMinDMG() {
+    public int getMinDMG() {
         return minDMG;
     }
 
-    private void setMinDMG(int minDMG) {
+    public void setMinDMG(int minDMG) {
         this.minDMG = minDMG;
     }
 
-    private int getMaxDMG() {
+    public int getMaxDMG() {
         return maxDMG;
     }
 
-    private void setMaxDMG(int maxDMG) {
+    public void setMaxDMG(int maxDMG) {
         this.maxDMG = maxDMG;
     }
 
-    private EnchantItem(String itemType, String imgUrl, int grade, int maxGrade, int minDMG, int maxDMG, int nowGrade, String tableName, String subType , int idForSelect) {
+    public EnchantItem(String itemType, String imgUrl, int grade, int maxGrade, int minDMG, int maxDMG, int nowGrade, String tableName, String subType, int idForSelect) {
         this.itemType = itemType;
         this.imgUrl = imgUrl;
         this.grade = grade;
@@ -114,6 +124,10 @@ public class EnchantItem {
         this.tableName = tableName;
         this.subType = subType;
         this.idForSelect = idForSelect;
+    }
+
+    public void success() {
+        nowGrade++;
     }
 
 

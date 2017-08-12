@@ -433,7 +433,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
-            android:background="@drawable/basegear"
             android:orientation="horizontal"
             android:weightSum="7">
 
@@ -452,33 +451,61 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_ear1_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="34dp" />
+                        android:layout_marginLeft="34dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_ear2_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="13dp" />
+                        android:layout_marginLeft="13dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_shoe_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="13dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_belt_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="34dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
                 </LinearLayout>
 
@@ -490,22 +517,36 @@
                     android:orientation="vertical"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_helmet_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2.70" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_wea_pri_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
                 </LinearLayout>
 
@@ -518,12 +559,19 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal">
 
-                <TextView
+                <com.kkk8888.bdosimulator.OutlineTextView
                     android:id="@+id/gear_wea_awake_nowgrade"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="145dp" />
+                    android:layout_marginTop="145dp"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:textStroke="true"
+                    app:textStrokeColor="#FF0000"
+                    app:textStrokeWidth="2.7dp" />
 
             </LinearLayout>
 
@@ -542,22 +590,36 @@
                     android:orientation="vertical"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_body_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="8dp" />
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2.70" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_wea_second_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="8dp" />
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
                 </LinearLayout>
 
@@ -568,28 +630,47 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_ring1_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="27dp"
-                        android:visibility="invisible" />
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_ring2_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginRight="5dp"
-                        android:visibility="invisible" />
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
-                    <TextView
+                    <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_glove_nowgrade"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
 
                     <com.kkk8888.bdosimulator.OutlineTextView
                         android:id="@+id/gear_neck_nowgrade"
@@ -600,10 +681,11 @@
                         android:gravity="center"
                         android:text=""
                         android:textColor="#ffffff"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
+                        android:typeface="normal"
                         app:textStroke="true"
                         app:textStrokeColor="#FF0000"
-                        app:textStrokeWidth="3.5dp" />
+                        app:textStrokeWidth="2.7dp" />
 
                 </LinearLayout>
 
@@ -638,7 +720,6 @@
             android:id="@+id/itemlist"
             android:layout_width="220dp"
             android:layout_height="210dp"
-            android:layout_below="@id/searchBtn"
             android:layout_centerHorizontal="true"
             android:visibility="gone"></ListView>
 
@@ -723,6 +804,19 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
             android:src="@drawable/bg_enchanting_right" />
+
+        <Button
+            android:id="@+id/gotov"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_gotov"
+            android:text="잠재력 돌파"
+            android:textColor="#cbcbcb"
+            android:textSize="16sp"
+            android:onClick="enchantItem2"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/linear"

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -61,6 +62,15 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     ImageView gear_helmet_selected, gear_body_selected, gear_ring1_selected, gear_ring2_selected, gear_glove_selected;
     ImageView gear_neak_selected, gear_wea_sec_selected, gear_wea_awake_selected, gear_wea_pri_selected;
     ImageView gear_ear1_selected, gear_ear2_selected, gear_shoes_selected, gear_belt_selected;
+
+    OutlineTextView gear_helmet_nowgrade, gear_body_nowgrade, gear_ring1_nowgrade, gear_ring2_nowgrade, gear_glove_nowgrade;
+    OutlineTextView gear_neak_nowgrade, gear_wea_sec_nowgrade, gear_wea_awake_nowgrade, gear_wea_pri_nowgrade;
+    OutlineTextView gear_ear1_nowgrade, gear_ear2_nowgrade, gear_shoes_nowgrade, gear_belt_nowgrade;
+
+    Button gotov; //돌파 버튼
+
+    ImageView needItem, enchantItem; //재료 아이템 , 강화 시킬 아이템
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,6 +126,12 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         dp = (TextView) view.findViewById(R.id.dp);
         wap = (TextView) view.findViewById(R.id.wap);
 
+        gotov = (Button) view.findViewById(R.id.gotov);
+        gotov.setOnClickListener(this);
+
+        needItem = (ImageView) view.findViewById(R.id.needItem);
+        enchantItem = (ImageView) view.findViewById(R.id.enchantItem);
+
 
         gear_helmet_selected = (ImageView) view.findViewById(R.id.gear_helmet_selected);
         gear_body_selected = (ImageView) view.findViewById(R.id.gear_body_selected);
@@ -132,6 +148,21 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         gear_belt_selected = (ImageView) view.findViewById(R.id.gear_belt_selected);
 
 
+        gear_helmet_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_helmet_nowgrade);
+        gear_body_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_body_nowgrade);
+        gear_ring1_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_ring1_nowgrade);
+        gear_ring2_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_ring2_nowgrade);
+        gear_glove_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_glove_nowgrade);
+        gear_neak_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_neck_nowgrade);
+        gear_wea_sec_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_wea_second_nowgrade);
+        gear_wea_awake_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_wea_awake_nowgrade);
+        gear_wea_pri_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_wea_pri_nowgrade);
+        gear_ear1_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_ear1_nowgrade);
+        gear_ear2_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_ear2_nowgrade);
+        gear_shoes_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_shoe_nowgrade);
+        gear_belt_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_belt_nowgrade);
+
+
         gear_helmet = (ImageView) view.findViewById(R.id.gear_helmet);
         gear_helmet.setTag(new EnchantItem("HELMET", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_helmet_selected));
         gear_body = (ImageView) view.findViewById(R.id.gear_body);
@@ -143,7 +174,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         gear_glove = (ImageView) view.findViewById(R.id.gear_glove);
         gear_glove.setTag(new EnchantItem("GLOVES", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_glove_selected));
         gear_neak = (ImageView) view.findViewById(R.id.gear_neck);
-        gear_neak.setTag(new EnchantItem("NECKLACE", "null", 0, 0, 0, 0, 5, "악세", "null", R.id.gear_neck_selected));
+        gear_neak.setTag(new EnchantItem("NECKLACE", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_neck_selected));
         gear_wea_sec = (ImageView) view.findViewById(R.id.gear_wea_second);
         gear_wea_sec.setTag(new EnchantItem("W_SECOND", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_second_selected));
         gear_wea_awake = (ImageView) view.findViewById(R.id.gear_wea_awake);
@@ -167,6 +198,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             tempView.setOnClickListener(this);
             tempView.setOnLongClickListener(this);
         }
+
 
     }
 
@@ -247,6 +279,40 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     void setGrade() {
 
 
+        ImageView iv;
+        EnchantItem item;
+        for (int i = 0; i < 13; i++) {
+            iv = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+            item = (EnchantItem) iv.getTag();
+            OutlineTextView textView = (OutlineTextView) mainView.findViewById(R.id.gear_ear1_nowgrade + i);
+            if (item.getNowGrade() == 0) continue;
+            if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 15 && item.getNowGrade() > 0)
+                textView.setText("+" + item.getNowGrade());
+            else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 16)
+                textView.setText("I");
+            else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 17)
+                textView.setText("II");
+            else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 18)
+                textView.setText("III");
+            else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 19)
+                textView.setText("IV");
+            else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() > 19)
+                textView.setText("V");
+            else if (item.getTableName().equals("악세") && item.getNowGrade() == 1)
+                textView.setText("I");
+            else if (item.getTableName().equals("악세") && item.getNowGrade() == 2)
+                textView.setText("II");
+            else if (item.getTableName().equals("악세") && item.getNowGrade() == 3)
+                textView.setText("III");
+            else if (item.getTableName().equals("악세") && item.getNowGrade() == 4)
+                textView.setText("IV");
+            else if (item.getTableName().equals("악세") && item.getNowGrade() == 5)
+                textView.setText("V");
+
+
+        }
+
+
     }
 
     @Override
@@ -274,6 +340,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                         item.setMaxGrade(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MAXENCHANTLVL"))));
                         item.setSubType(cursor.getString(cursor.getColumnIndex("SUBTYPE")));
                         searcheditem.get(position).set_id(cursor.getInt(cursor.getColumnIndex("_id")));
+                        item.setItemId(searcheditem.get(position).get_id());
+
                         adapter.notifyDataSetChanged();
                     }
 
@@ -295,8 +363,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                         while (cursor.moveToNext()) {
 
-
-                            //item.setMaxDMG(cursor.getInt(cursor.getColumnIndex("AddedMDD")));
 
                             item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
 
@@ -383,7 +449,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
                                 String[] sibal2 = sibal.split("\\+");
                                 item.setBaseAp(5);
-                                item.maxDMG = Integer.parseInt(sibal2[1]) + item.getBaseAp();
+                                item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                             } else if (item.getSubType().equals("AMULET")) {
                                 String sibal = cursor.getString(cursor.getColumnIndex("AddedMDD"));
                                 String sibal2 = cursor.getString(cursor.getColumnIndex("MDD"));
@@ -426,7 +492,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 String sibal = cursor.getString(cursor.getColumnIndex("RDD"));
                                 String[] sibal2 = sibal.split("\\+");
                                 item.setBaseAp(5);
-                                item.maxDMG = Integer.parseInt(sibal2[1]) + item.getBaseAp();
+                                item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                             } else if (item.getSubType().equals("DAGGER")) {
                                 String sibal = cursor.getString(cursor.getColumnIndex("AddedMDD"));
                                 String sibal2 = cursor.getString(cursor.getColumnIndex("MDD"));
@@ -469,7 +535,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
                                 item.setBaseAp(5);
                                 String[] sibal2 = sibal.split("\\+");
-                                item.maxDMG = Integer.parseInt(sibal2[1]) + item.getBaseAp();
+                                item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                             } else if (item.getSubType().equals("ORNAMENT")) {
                                 String sibal = cursor.getString(cursor.getColumnIndex("AddedDDD"));
                                 String sibal2 = cursor.getString(cursor.getColumnIndex("DDD"));
@@ -513,7 +579,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
                                 String[] sibal2 = sibal.split("\\+");
                                 item.setBaseAp(5);
-                                item.maxDMG = Integer.parseInt(sibal2[1]) + item.getBaseAp();
+                                item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                             } else if (item.getSubType().equals("TOY")) {
                                 String sibal = cursor.getString(cursor.getColumnIndex("AddedMDD"));
                                 String sibal2 = cursor.getString(cursor.getColumnIndex("MDD"));
@@ -634,8 +700,29 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 item.setBaseAp(5);
                                 item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
 
+                            } else if (item.getSubType().equals("KUNAISHURIKEN")) {
+                                String sibal = cursor.getString(cursor.getColumnIndex("AddedDDD"));
+                                String sibal2 = cursor.getString(cursor.getColumnIndex("DDD"));
+                                if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                                else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                                else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                                else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                                else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                                else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                                else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                                else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                                else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                                else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                                else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                                else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                                else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                                else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                                else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                                else item.setBaseAp(0);
+                                item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                                item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
                             }
-                        }
+                        }//
 
                     }
 
@@ -666,10 +753,13 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
 
                 stat = initAllStat();
+                setGrade();
 
                 ap.setText("공격력\n" + stat[0]);
                 dp.setText("방어력\n" + stat[1]);
                 wap.setText("각성 공격력\n" + stat[2]);
+
+
             }
 
 
@@ -721,10 +811,437 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         return true;
     }
 
+    public void reloadData(EnchantItem item) {
+
+        Toast.makeText(getContext(), item.getItemId() + "시발 " + item.getTableName(), Toast.LENGTH_SHORT).show();
+
+
+        if (item.getTableName().equals("방어구")) {
+
+            String sql2 = "select * from Blunt where `_id` = '" + item.getItemId() + "' and `Enchant` = '" + item.getNowGrade() + "'";
+            if (db.isOpen()) {
+
+                Cursor cursor = db.rawQuery(sql2, null);
+
+
+                while (cursor.moveToNext()) {
+
+
+                    item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+
+
+                }
+
+            }
+
+        } else if (item.getTableName().equals("무기")) {
+
+            String sql2 = "select * from LongSword where `_id` = '" + item.getItemId() + "' and `Enchant` = '" + item.getNowGrade() + "'";
+            if (db.isOpen()) {
+
+                Cursor cursor = db.rawQuery(sql2, null);
+
+                Log.i("이거다", item.getSubType());
+
+                while (cursor.moveToNext()) {
+
+                    //워리어시작.. 힘들다
+
+                    if (item.getSubType().equals("SWORD")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+                    } else if (item.getSubType().equals("GREATSWORD")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+                    } else if (item.getSubType().equals("SHIELD")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedDDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("DDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
+                        //워리어 끝
+
+
+                        //소서러 시작
+
+                    } else if (item.getSubType().equals("TALISMAN")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("SCYTHE")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("AMULET")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedMDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("MDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+
+                        //소서 끝
+                        //레인저 시작
+                    } else if (item.getSubType().equals("BOW")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("RDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("ELEMENTALSWORD")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("RDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("DAGGER")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedMDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("MDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+
+                        //레인저 끝
+                        //자이언트 시작
+                    } else if (item.getSubType().equals("AXE")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("IRONGLOVES")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        item.setBaseAp(5);
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("ORNAMENT")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedDDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("DDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+
+                        //자이언트 끝
+                        //금수랑 시작
+
+                    } else if (item.getSubType().equals("SHORTSWORD")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("SKYBLUNT")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("TOY")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedMDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("MDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+
+                        //금수랑 끝
+                        //발키리 시작
+
+                    } else if (item.getSubType().equals("LANCIA")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+
+                        //발키리끝
+                        //무사 시작
+                    } else if (item.getSubType().equals("BLADE")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+
+                    } else if (item.getSubType().equals("MUSINDO")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+                    } else if (item.getSubType().equals("SHORTBOW")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedDDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("DDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
+                    } else if (item.getSubType().equals("WOLCHANG")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("CHAKRAM")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+                    } else if (item.getSubType().equals("SURADO")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("STAFF")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+
+                    } else if (item.getSubType().equals("SPHERE")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("SPHERE2")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+
+                    } else if (item.getSubType().equals("KUNAISHURIKEN")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("AddedDDD"));
+                        String sibal2 = cursor.getString(cursor.getColumnIndex("DDD"));
+                        if (sibal2.equals("1D1-1")) item.setBaseAp(0);
+                        else if (sibal2.equals("1D1")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D2")) item.setBaseAp(1);
+                        else if (sibal2.equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D4")) item.setBaseAp(2);
+                        else if (sibal2.equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2.equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2.equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2.equals("1D11")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D12")) item.setBaseAp(6);
+                        else if (sibal2.equals("1D13")) item.setBaseAp(7);
+                        else if (sibal2.equals("1D14")) item.setBaseAp(7);
+                        else item.setBaseAp(0);
+                        item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
+                        item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
+                    }
+                }//
+
+            }
+
+
+        } else if (item.getTableName().equals("악세")) {
+
+            String sql2 = "select * from TwoHandedSword where `_id` = '" + item.getItemId() + "' and `Enchant` = '" + item.getNowGrade() + "'";
+            ;
+            if (db.isOpen()) {
+
+                Cursor cursor = db.rawQuery(sql2, null);
+
+
+                while (cursor.moveToNext()) {
+
+                    item.setMaxDMG(cursor.getInt(cursor.getColumnIndex("AddedMDD")));
+
+                    item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+
+
+                }
+
+
+            }
+
+        }
+        int[] stat = new int[3];
+
+
+        stat = initAllStat();
+        setGrade();
+
+        ap.setText("공격력\n" + stat[0]);
+        dp.setText("방어력\n" + stat[1]);
+        wap.setText("각성 공격력\n" + stat[2]);
+    }
+
     @Override
     public void onClick(final View v) {
 
         EnchantItem item = (EnchantItem) v.getTag();
+        gotov.setTag(item);
+
+
+        if (v instanceof Button) {
+
+            if (gotov.getTag() == null) return;
+
+            EnchantItem temp = (EnchantItem) gotov.getTag();
+            if (temp.getNowGrade() == temp.getMaxGrade()) return;
+            temp.success();
+
+            Log.i("씨발", temp.getNowGrade() + ".......");
+            reloadData(temp);
+        }
+
 
         StringBuffer buffer = new StringBuffer();
         buffer.append("현재 단계 : " + item.getNowGrade() + "\n");
@@ -732,7 +1249,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         buffer.append("공격력 증가량 : " + item.getMaxDMG() + "\n");
         buffer.append("방어력 증가량 : " + item.getMinDMG() + "\n");
         buffer.append("서브 타입 : " + item.getSubType());
-        Toast.makeText(getContext(), buffer.toString(), Toast.LENGTH_SHORT).show();
+        buffer.append("맥스 강화수치 : " + item.getMaxGrade());
+//        Toast.makeText(getContext(), buffer.toString(), Toast.LENGTH_SHORT).show();
 
         ImageView imageView;
         for (int i = 0; i < 13; i++) {
@@ -744,8 +1262,11 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         imageView.setVisibility(View.VISIBLE);
         imageView = null;
 
+        Picasso.with(getContext()).load(item.getImgUrl()).resize(100, 100).into(enchantItem);
+
 
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -866,6 +1387,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                         "%'";
             }
             buffer = new StringBuffer();
+            int _id = 0;
 
             if (db.isOpen()) {
 
@@ -874,13 +1396,14 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 while (cursor.moveToNext()) {
                     buffer.append(cursor.getString(cursor.getColumnIndex("NAME_KR")));
                     buffer.append("\n");
+//                    _id = cursor.getInt(cursor.getColumnIndex("_id"));
 
                 }
             }
 
             String[] tlqkf = buffer.toString().split("\n");
 
-            int _id = 0;
+
             searcheditem.clear();
             for (int i = 0; i < tlqkf.length; i++) {
                 if (tlqkf[i].contains(search)) {
