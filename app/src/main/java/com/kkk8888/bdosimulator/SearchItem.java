@@ -30,4 +30,5 @@ public class SearchItem {
         this.itemName = itemName;
         this._id = _id;
     }
+
 }

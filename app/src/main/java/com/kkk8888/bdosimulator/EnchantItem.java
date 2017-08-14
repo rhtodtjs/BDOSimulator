@@ -19,9 +19,35 @@ public class EnchantItem {
     private int maxDMG = 0;// 아이템의 공격력 증가량
     private int nowGrade = 0; //아이템의 현재 강화 단계..
     private int baseAp = 0; // 아이템의 베이스 공격력..
+    private int needItemID = 0;
+
+    public int getNeedItemID() {
+        return needItemID;
+    }
+
+    public void setNeedItemID(int needItemID) {
+        this.needItemID = needItemID;
+    }
+
+    public int getIdForSelect() {
+        return idForSelect;
+    }
+
+    public void setIdForSelect(int idForSelect) {
+        this.idForSelect = idForSelect;
+    }
+
+    public int getGradeID() {
+        return gradeID;
+    }
+
+    public void setGradeID(int gradeID) {
+        this.gradeID = gradeID;
+    }
 
     int idForSelect = 0;
     private int itemId = 0;
+    private int gradeID = 0;
 
     public int getItemId() {
         return itemId;
@@ -113,7 +139,7 @@ public class EnchantItem {
         this.maxDMG = maxDMG;
     }
 
-    public EnchantItem(String itemType, String imgUrl, int grade, int maxGrade, int minDMG, int maxDMG, int nowGrade, String tableName, String subType, int idForSelect) {
+    public EnchantItem(String itemType, String imgUrl, int grade, int maxGrade, int minDMG, int maxDMG, int nowGrade, String tableName, String subType, int idForSelect, int gradeID) {
         this.itemType = itemType;
         this.imgUrl = imgUrl;
         this.grade = grade;
@@ -124,6 +150,7 @@ public class EnchantItem {
         this.tableName = tableName;
         this.subType = subType;
         this.idForSelect = idForSelect;
+        this.gradeID = gradeID;
     }
 
     public void success() {

@@ -63,13 +63,19 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     ImageView gear_neak_selected, gear_wea_sec_selected, gear_wea_awake_selected, gear_wea_pri_selected;
     ImageView gear_ear1_selected, gear_ear2_selected, gear_shoes_selected, gear_belt_selected;
 
+    ImageView gear_helmet_grade, gear_body_grade, gear_ring1_grade, gear_ring2_grade, gear_glove_grade;
+    ImageView gear_neak_grade, gear_wea_sec_grade, gear_wea_awake_grade, gear_wea_pri_grade;
+    ImageView gear_ear1_grade, gear_ear2_grade, gear_shoes_grade, gear_belt_grade;
+
     OutlineTextView gear_helmet_nowgrade, gear_body_nowgrade, gear_ring1_nowgrade, gear_ring2_nowgrade, gear_glove_nowgrade;
     OutlineTextView gear_neak_nowgrade, gear_wea_sec_nowgrade, gear_wea_awake_nowgrade, gear_wea_pri_nowgrade;
     OutlineTextView gear_ear1_nowgrade, gear_ear2_nowgrade, gear_shoes_nowgrade, gear_belt_nowgrade;
 
     Button gotov; //돌파 버튼
 
-    ImageView needItem, enchantItem; //재료 아이템 , 강화 시킬 아이템
+    ImageView needItem, enchantItem;
+
+    OutlineTextView enchantGrade; //재료 아이템 , 강화 시킬 아이템
 
 
     @Override
@@ -131,6 +137,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         needItem = (ImageView) view.findViewById(R.id.needItem);
         enchantItem = (ImageView) view.findViewById(R.id.enchantItem);
+        enchantGrade = (OutlineTextView) view.findViewById(R.id.enchantGrade);
 
 
         gear_helmet_selected = (ImageView) view.findViewById(R.id.gear_helmet_selected);
@@ -146,6 +153,20 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         gear_ear2_selected = (ImageView) view.findViewById(R.id.gear_ear2_selected);
         gear_shoes_selected = (ImageView) view.findViewById(R.id.gear_shoe_selected);
         gear_belt_selected = (ImageView) view.findViewById(R.id.gear_belt_selected);
+
+        gear_helmet_grade = (ImageView) view.findViewById(R.id.gear_helmet_grade);
+        gear_body_grade = (ImageView) view.findViewById(R.id.gear_body_grade);
+        gear_ring1_grade = (ImageView) view.findViewById(R.id.gear_ring1_grade);
+        gear_ring2_grade = (ImageView) view.findViewById(R.id.gear_ring2_grade);
+        gear_glove_grade = (ImageView) view.findViewById(R.id.gear_glove_grade);
+        gear_neak_grade = (ImageView) view.findViewById(R.id.gear_neck_grade);
+        gear_wea_sec_grade = (ImageView) view.findViewById(R.id.gear_wea_second_grade);
+        gear_wea_awake_grade = (ImageView) view.findViewById(R.id.gear_wea_awake_grade);
+        gear_wea_pri_grade = (ImageView) view.findViewById(R.id.gear_wea_pri_grade);
+        gear_ear1_grade = (ImageView) view.findViewById(R.id.gear_ear1_grade);
+        gear_ear2_grade = (ImageView) view.findViewById(R.id.gear_ear2_grade);
+        gear_shoes_grade = (ImageView) view.findViewById(R.id.gear_shoe_grade);
+        gear_belt_grade = (ImageView) view.findViewById(R.id.gear_belt_grade);
 
 
         gear_helmet_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_helmet_nowgrade);
@@ -164,31 +185,31 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
 
         gear_helmet = (ImageView) view.findViewById(R.id.gear_helmet);
-        gear_helmet.setTag(new EnchantItem("HELMET", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_helmet_selected));
+        gear_helmet.setTag(new EnchantItem("HELMET", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_helmet_selected, R.id.gear_helmet_grade));
         gear_body = (ImageView) view.findViewById(R.id.gear_body);
-        gear_body.setTag(new EnchantItem("BODY", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_body_selected));
+        gear_body.setTag(new EnchantItem("BODY", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_body_selected, R.id.gear_body_grade));
         gear_ring1 = (ImageView) view.findViewById(R.id.gear_ring1);
-        gear_ring1.setTag(new EnchantItem("RING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ring1_selected));
+        gear_ring1.setTag(new EnchantItem("RING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ring1_selected, R.id.gear_ring1_grade));
         gear_ring2 = (ImageView) view.findViewById(R.id.gear_ring2);
-        gear_ring2.setTag(new EnchantItem("RING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ring2_selected));
+        gear_ring2.setTag(new EnchantItem("RING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ring2_selected, R.id.gear_ring2_grade));
         gear_glove = (ImageView) view.findViewById(R.id.gear_glove);
-        gear_glove.setTag(new EnchantItem("GLOVES", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_glove_selected));
+        gear_glove.setTag(new EnchantItem("GLOVES", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_glove_selected, R.id.gear_glove_grade));
         gear_neak = (ImageView) view.findViewById(R.id.gear_neck);
-        gear_neak.setTag(new EnchantItem("NECKLACE", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_neck_selected));
+        gear_neak.setTag(new EnchantItem("NECKLACE", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_neck_selected, R.id.gear_neck_grade));
         gear_wea_sec = (ImageView) view.findViewById(R.id.gear_wea_second);
-        gear_wea_sec.setTag(new EnchantItem("W_SECOND", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_second_selected));
+        gear_wea_sec.setTag(new EnchantItem("W_SECOND", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_second_selected, R.id.gear_wea_second_grade));
         gear_wea_awake = (ImageView) view.findViewById(R.id.gear_wea_awake);
-        gear_wea_awake.setTag(new EnchantItem("W_AWAKE", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_awake_selected));
+        gear_wea_awake.setTag(new EnchantItem("W_AWAKE", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_awake_selected, R.id.gear_wea_awake_grade));
         gear_wea_pri = (ImageView) view.findViewById(R.id.gear_wea_pri);
-        gear_wea_pri.setTag(new EnchantItem("W_PRI", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_pri_selected));
+        gear_wea_pri.setTag(new EnchantItem("W_PRI", "null", 0, 0, 0, 0, 0, "무기", "null", R.id.gear_wea_pri_selected, R.id.gear_wea_pri_grade));
         gear_ear1 = (ImageView) view.findViewById(R.id.gear_ear1);
-        gear_ear1.setTag(new EnchantItem("EARRING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ear1_selected));
+        gear_ear1.setTag(new EnchantItem("EARRING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ear1_selected, R.id.gear_ear1_grade));
         gear_ear2 = (ImageView) view.findViewById(R.id.gear_ear2);
-        gear_ear2.setTag(new EnchantItem("EARRING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ear2_selected));
+        gear_ear2.setTag(new EnchantItem("EARRING", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_ear2_selected, R.id.gear_ear2_grade));
         gear_shoes = (ImageView) view.findViewById(R.id.gear_shoe);
-        gear_shoes.setTag(new EnchantItem("SHOES", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_shoe_selected));
+        gear_shoes.setTag(new EnchantItem("SHOES", "null", 0, 0, 0, 0, 0, "방어구", "null", R.id.gear_shoe_selected, R.id.gear_shoe_grade));
         gear_belt = (ImageView) view.findViewById(R.id.gear_belt);
-        gear_belt.setTag(new EnchantItem("BELT", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_belt_selected));
+        gear_belt.setTag(new EnchantItem("BELT", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_belt_selected, R.id.gear_belt_grade));
 
 
         ImageView tempView = null;
@@ -351,6 +372,23 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 Picasso.with(getContext()).load(item.getImgUrl()).resize(125, 125).into(image);
                 Toast.makeText(getContext(), item.getTableName(), Toast.LENGTH_SHORT).show();
+                ImageView iv = (ImageView) mainView.findViewById(item.getGradeID());
+                switch (item.getGrade()) {
+                    case 0:
+                        iv.setImageResource(R.drawable.item_grade_0);
+                        break;
+                    case 1:
+                        iv.setImageResource(R.drawable.item_grade_1);
+                        break;
+                    case 2:
+                        iv.setImageResource(R.drawable.item_grade_2);
+                        break;
+                    case 3:
+                        iv.setImageResource(R.drawable.item_grade_3);
+                        break;
+
+                }
+                iv = null;
 
 
                 if (item.getTableName().equals("방어구")) {
@@ -365,6 +403,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
 
                             item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
+                            item.setNeedItemID(cursor.getInt(cursor.getColumnIndex("NeedEnchantItemID")));
 
 
                         }
@@ -722,6 +761,9 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
                                 item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
                             }
+
+                            item.setNeedItemID(cursor.getInt(cursor.getColumnIndex("NeedEnchantItemID")));
+
                         }//
 
                     }
@@ -742,6 +784,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                             item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
 
+                            item.setNeedItemID(cursor.getInt(cursor.getColumnIndex("NeedEnchantItemID")));
 
                         }
 
@@ -812,8 +855,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     }
 
     public void reloadData(EnchantItem item) {
-
-        Toast.makeText(getContext(), item.getItemId() + "시발 " + item.getTableName(), Toast.LENGTH_SHORT).show();
 
 
         if (item.getTableName().equals("방어구")) {
@@ -1228,6 +1269,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         EnchantItem item = (EnchantItem) v.getTag();
         gotov.setTag(item);
+        enchantGrade.setText("");
 
 
         if (v instanceof Button) {
@@ -1235,22 +1277,14 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             if (gotov.getTag() == null) return;
 
             EnchantItem temp = (EnchantItem) gotov.getTag();
-            if (temp.getNowGrade() == temp.getMaxGrade()) return;
-            temp.success();
-
-            Log.i("씨발", temp.getNowGrade() + ".......");
-            reloadData(temp);
+            if (temp.getNowGrade() == temp.getMaxGrade()) {
+                //return;
+            } else {
+                temp.success();
+                reloadData(temp);
+            }
         }
 
-
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("현재 단계 : " + item.getNowGrade() + "\n");
-        buffer.append("테이블 이름 " + item.getItemType() + "\n");
-        buffer.append("공격력 증가량 : " + item.getMaxDMG() + "\n");
-        buffer.append("방어력 증가량 : " + item.getMinDMG() + "\n");
-        buffer.append("서브 타입 : " + item.getSubType());
-        buffer.append("맥스 강화수치 : " + item.getMaxGrade());
-//        Toast.makeText(getContext(), buffer.toString(), Toast.LENGTH_SHORT).show();
 
         ImageView imageView;
         for (int i = 0; i < 13; i++) {
@@ -1263,6 +1297,35 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         imageView = null;
 
         Picasso.with(getContext()).load(item.getImgUrl()).resize(100, 100).into(enchantItem);
+
+
+        if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 15 && item.getNowGrade() > 0)
+            enchantGrade.setText("+" + item.getNowGrade());
+        else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 16 && item.getNowGrade() > 15)
+            enchantGrade.setText("I");
+        else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 17)
+            enchantGrade.setText("II");
+        else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 18)
+            enchantGrade.setText("III");
+        else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 19)
+            enchantGrade.setText("IV");
+        else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 20)
+            enchantGrade.setText("V");
+        else if (item.getTableName().equals("악세") && item.getNowGrade() == 1)
+            enchantGrade.setText("I");
+        else if (item.getTableName().equals("악세") && item.getNowGrade() == 2)
+            enchantGrade.setText("II");
+        else if (item.getTableName().equals("악세") && item.getNowGrade() == 3)
+            enchantGrade.setText("III");
+        else if (item.getTableName().equals("악세") && item.getNowGrade() == 4)
+            enchantGrade.setText("IV");
+        else if (item.getTableName().equals("악세") && item.getNowGrade() == 5)
+            enchantGrade.setText("V");
+
+//        String sql = "select * from db_items_base where `_id` = '" + item.getNeedItemID() + "'";
+//        if(db.isOpen()){
+//
+//        }
 
 
     }

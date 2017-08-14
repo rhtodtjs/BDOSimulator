@@ -5,7 +5,7 @@ android {
         release {
             keyAlias 'release1'
             keyPassword '8529731z'
-            storeFile file('D:/Android/Release/BDOSimulator/sign.jks')
+            storeFile file('D:/Android/Release/BDOSimulator/sign')
             storePassword '8529731z'
         }
     }
