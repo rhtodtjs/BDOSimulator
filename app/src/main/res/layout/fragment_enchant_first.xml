@@ -967,11 +967,11 @@
             android:id="@+id/enchantItem"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:scaleType="centerCrop"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="30dp"
             android:layout_marginRight="64dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ohsit" />
 
         <com.kkk8888.bdosimulator.OutlineTextView
@@ -1106,6 +1106,17 @@
 
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ratio"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/linear"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 

@@ -157,5 +157,11 @@ public class EnchantItem {
         nowGrade++;
     }
 
+    public void fail() {
+
+        if (nowGrade == 0) return;
+        if (nowGrade >= 17) nowGrade--;
+    }
+
 
 }

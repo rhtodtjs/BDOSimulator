@@ -1,11 +1,8 @@
 package com.kkk8888.bdosimulator;
 
-
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,25 +13,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -77,6 +71,12 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
     OutlineTextView enchantGrade; //재료 아이템 , 강화 시킬 아이템
 
+    EnchantActivity mainActivity;
+    EnchantItemRatio itemRate = new EnchantItemRatio();
+    Random rnd = new Random();
+
+    TextView tv_ratio;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,8 +94,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_enchant_first, container, false);
-        mainView = view;
+        mainView = inflater.inflate(R.layout.fragment_enchant_first, container, false);
 
         getDBfile();
 
@@ -105,7 +104,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         settingView(mainView);
 
 
-        return view;
+        return mainView;
 
     }
 
@@ -121,6 +120,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             }
         });
 
+
+        tv_ratio = (TextView) view.findViewById(R.id.tv_ratio);
 
         searchView.setIconifiedByDefault(false);
         itemlist = (ListView) view.findViewById(R.id.itemlist);
@@ -220,6 +221,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             tempView.setOnLongClickListener(this);
         }
 
+        mainActivity = (EnchantActivity) getActivity();
+
 
     }
 
@@ -306,7 +309,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             iv = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
             item = (EnchantItem) iv.getTag();
             OutlineTextView textView = (OutlineTextView) mainView.findViewById(R.id.gear_ear1_nowgrade + i);
-            if (item.getNowGrade() == 0) continue;
+            if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 0) continue;
             if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 15 && item.getNowGrade() > 0)
                 textView.setText("+" + item.getNowGrade());
             else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 16)
@@ -319,6 +322,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 textView.setText("IV");
             else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() > 19)
                 textView.setText("V");
+            else if (item.getTableName().equals("악세") && item.getNowGrade() == 0)
+                textView.setText("");
             else if (item.getTableName().equals("악세") && item.getNowGrade() == 1)
                 textView.setText("I");
             else if (item.getTableName().equals("악세") && item.getNowGrade() == 2)
@@ -1264,6 +1269,342 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         wap.setText("각성 공격력\n" + stat[2]);
     }
 
+    public boolean weaponPowerUp(EnchantItem item) {
+
+        boolean isUp = false;
+        int nowStack = mainActivity.seleceted;
+        int nowGrade = item.getNowGrade();
+        int maxStack;
+        double nowRatio;
+        double bonusRatio;
+        double baseRatio;
+        double maxRatio;
+        double currentRatio;
+
+        switch (item.getGrade()) {
+            case 0:
+                //일반템
+                baseRatio = itemRate.whiteItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.whiteItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.whiteItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.stackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+                break;
+
+            case 1:
+                //녹템
+                baseRatio = itemRate.greenItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.greenItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.greenItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.stackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+                break;
+            case 2:
+                //파템
+
+                baseRatio = itemRate.blueItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.blueItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.blueItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.stackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+                break;
+
+            case 3:
+                //보스템
+
+                baseRatio = itemRate.yellowItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.yellowItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.yellowItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.stackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+
+                break;
+        }
+
+        return isUp;
+
+    }
+
+
+    public boolean bodyPowerUp(EnchantItem item) {
+
+        boolean isUp = false;
+        int nowStack = mainActivity.seleceted;
+        int nowGrade = item.getNowGrade();
+        int maxStack;
+        double nowRatio;
+        double bonusRatio;
+        double baseRatio;
+        double maxRatio;
+        double currentRatio;
+
+        switch (item.getGrade()) {
+            case 0:
+                //일반템
+                baseRatio = itemRate.bodyWhiteItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.bodyWhiteItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.bodyWhiteItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.bodystackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+                break;
+
+            case 1:
+                //녹템
+                baseRatio = itemRate.bodyGreenItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.bodyGreenItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.bodyGreenItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.bodystackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+                break;
+            case 2:
+                //파템
+
+                baseRatio = itemRate.bodyBlueItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.bodyBlueItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.bodyBlueItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.bodystackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+                break;
+
+            case 3:
+                //보스템
+
+                baseRatio = itemRate.bodyYellowItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.bodyYellowItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.bodyYellowItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.bodystackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+
+                break;
+        }
+
+        return isUp;
+
+    }
+
+    public boolean accePowerUp(EnchantItem item) {
+
+        boolean isUp = false;
+        int nowStack = mainActivity.seleceted;
+        int nowGrade = item.getNowGrade();
+        int maxStack;
+        double nowRatio;
+        double bonusRatio;
+        double baseRatio;
+        double maxRatio;
+        double currentRatio;
+
+        switch (item.getGrade()) {
+
+            case 0:
+                //일반템
+                baseRatio = itemRate.AcceWhiteItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.AcceWhiteItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.AcceWhiteItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.accestackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+                break;
+
+            case 1:
+                //녹템
+                baseRatio = itemRate.AcceGreenItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.AcceGreenItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.AcceGreenItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.accestackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+                break;
+            case 2:
+                //파템
+
+                baseRatio = itemRate.AcceBlueItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.AcceBlueItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.AcceBlueItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.accestackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+                break;
+
+            case 3:
+                //보스템
+
+                baseRatio = itemRate.AcceYellowItemMaxRate.get(nowGrade).getBaseRate();
+                maxRatio = itemRate.AcceYellowItemMaxRate.get(nowGrade).getMaxRate();
+                maxStack = itemRate.AcceYellowItemMaxRate.get(nowGrade).getMaxStack();
+
+                nowRatio = rnd.nextDouble() * 100;
+                bonusRatio = itemRate.accestackRatio[nowGrade];
+
+                if (nowStack >= maxStack) nowStack = maxStack;
+
+                currentRatio = baseRatio + bonusRatio * nowStack;
+
+
+                tv_ratio.setText(" rnd " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+
+
+                if (nowRatio <= currentRatio) isUp = true;
+                else isUp = false;
+
+
+                break;
+        }
+
+        return isUp;
+
+    }
+
+
     @Override
     public void onClick(final View v) {
 
@@ -1280,7 +1621,70 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             if (temp.getNowGrade() == temp.getMaxGrade()) {
                 //return;
             } else {
-                temp.success();
+                switch (temp.getTableName()) {
+
+                    case "무기":
+
+                        if (weaponPowerUp(temp)) {
+                            temp.success();
+                            if (temp.getNowGrade() > 7) mainActivity.seleceted = 0;
+                        } else {
+
+                            if (temp.getNowGrade() >= 0 && temp.getNowGrade() <= 14)
+                                mainActivity.seleceted++;
+                            else if (temp.getNowGrade() == 15) mainActivity.seleceted += 2;
+                            else if (temp.getNowGrade() == 16) mainActivity.seleceted += 3;
+                            else if (temp.getNowGrade() == 17) mainActivity.seleceted += 4;
+                            else if (temp.getNowGrade() == 18) mainActivity.seleceted += 5;
+                            else if (temp.getNowGrade() == 19) mainActivity.seleceted += 6;
+                            temp.fail();
+
+                        }
+
+                        break;
+
+                    case "방어구":
+
+                        if (bodyPowerUp(temp)) {
+                            temp.success();
+                            if (temp.getNowGrade() > 5) mainActivity.seleceted = 0;
+                        } else {
+
+                            if (temp.getNowGrade() >= 0 && temp.getNowGrade() <= 14) {
+                                mainActivity.seleceted++;
+                            } else if (temp.getNowGrade() == 15) mainActivity.seleceted += 2;
+                            else if (temp.getNowGrade() == 16) mainActivity.seleceted += 3;
+                            else if (temp.getNowGrade() == 17) mainActivity.seleceted += 4;
+                            else if (temp.getNowGrade() == 18) mainActivity.seleceted += 5;
+                            else if (temp.getNowGrade() == 19) mainActivity.seleceted += 6;
+                            temp.fail();
+                        }
+
+                        break;
+
+                    case "악세":
+
+                        if (accePowerUp(temp)) {
+                            temp.success();
+                            mainActivity.seleceted = 0;
+                        } else {
+
+                            temp.setNowGrade(0);
+                            mainActivity.seleceted++;
+                            temp.fail();
+
+                        }
+
+
+                        break;
+
+
+                }
+
+
+                mainActivity.stackChanged();
+                mainActivity.reloadStack();
+
                 reloadData(temp);
             }
         }
@@ -1311,7 +1715,9 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             enchantGrade.setText("IV");
         else if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 20)
             enchantGrade.setText("V");
-        else if (item.getTableName().equals("악세") && item.getNowGrade() == 1)
+        else if (item.getTableName().equals("악세") && item.getNowGrade() == 0) {
+            enchantGrade.setText("");
+        } else if (item.getTableName().equals("악세") && item.getNowGrade() == 1)
             enchantGrade.setText("I");
         else if (item.getTableName().equals("악세") && item.getNowGrade() == 2)
             enchantGrade.setText("II");
@@ -1322,14 +1728,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         else if (item.getTableName().equals("악세") && item.getNowGrade() == 5)
             enchantGrade.setText("V");
 
-//        String sql = "select * from db_items_base where `_id` = '" + item.getNeedItemID() + "'";
-//        if(db.isOpen()){
-//
-//        }
-
 
     }
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
