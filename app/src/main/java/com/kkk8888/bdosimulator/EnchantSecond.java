@@ -78,7 +78,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
     TextView tv_ratio;
 
-    static EnchantItem focusView;
+    EnchantItem focusView;
 
 
     @Override
@@ -1745,7 +1745,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         enchantGrade.setText("");
 
 
-//        focusView = item;
+        focusView = item;
 
         if (item != null) previewRate(item);
 

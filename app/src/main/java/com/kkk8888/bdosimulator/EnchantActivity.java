@@ -25,8 +25,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     int seleceted = 0;
     int now = 0;
 
-    EnchantItem focusView;
-    EnchantSecond fragment;
+    EnchantSecond enchantSecond;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +58,14 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         tabLayout.addTab(tabLayout.newTab().setText("탭"));
         pagerAdapter = new EnchantPager(getSupportFragmentManager(), classType);
 
+
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(pagerAdapter);
 
-//
-//        EnchantSecond enchantSecond = (EnchantSecond) getSupportFragmentManager().getFragments().get(0);
-//
-//        if(enchantSecond != null){
-//            Log.i("오우","널이아니네");
-//        }else Log.i("시팔","널이노");
+        Fragment fragment = pagerAdapter.getItem(2);
+
+        enchantSecond = (EnchantSecond) fragment;
+
 
         for (int i = 0; i < 6; i++) {
             OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);
@@ -112,11 +110,11 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         seleceted = Stack.stack_0;
 
         Stack.stack_0 = 0;
-        Stack.stack_1 = 25;
-        Stack.stack_2 = 46;
-        Stack.stack_3 = 68;
-        Stack.stack_4 = 95;
-        Stack.stack_5 = 110;
+        Stack.stack_1 = 21;
+        Stack.stack_2 = 36;
+        Stack.stack_3 = 58;
+        Stack.stack_4 = 68;
+        Stack.stack_5 = 88;
 
         reloadStack();
 
@@ -143,11 +141,11 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.stack_1:
                 now = 1;
                 seleceted = Stack.stack_1;
+
                 break;
             case R.id.stack_2:
                 now = 2;
                 seleceted = Stack.stack_2;
-
                 break;
             case R.id.stack_3:
                 now = 3;
@@ -165,6 +163,9 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
         }
+
+        if (enchantSecond.focusView != null)
+            enchantSecond.previewRate(enchantSecond.focusView);
 
 
     }
