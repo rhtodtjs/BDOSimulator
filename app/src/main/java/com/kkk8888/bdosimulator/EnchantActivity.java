@@ -84,11 +84,11 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         seleceted = Integer.parseInt((stack_0).getText().toString());
 
         Stack.stack_0 = 0;
-        Stack.stack_1 = 25;
-        Stack.stack_2 = 46;
-        Stack.stack_3 = 68;
-        Stack.stack_4 = 95;
-        Stack.stack_5 = 110;
+        Stack.stack_1 = 21;
+        Stack.stack_2 = 44;
+        Stack.stack_3 = 58;
+        Stack.stack_4 = 68;
+        Stack.stack_5 = 95;
 
 
         reloadStack();
