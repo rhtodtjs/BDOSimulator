@@ -29,7 +29,8 @@ public class EnchantItemRatio {
             0.75, //16
             0.50, //17
             0.25, //18
-            0.15 //19
+            0.15, //19
+            0.1
     };
 
     final static double[] bodystackRatio = new double[]{
@@ -53,7 +54,8 @@ public class EnchantItemRatio {
             0.75, //16
             0.50, //17
             0.25, //18
-            0.15 //19
+            0.15, //19
+            0.1
     };
 
     final static double[] accestackRatio = new double[]{
@@ -62,7 +64,8 @@ public class EnchantItemRatio {
             0.75, //16
             0.50, //17
             0.25, //18
-            0.15 //19
+            0.15, //19
+            0.1
 
 
     };
@@ -291,6 +294,7 @@ public class EnchantItemRatio {
         AcceWhiteItemMaxRate.add(new ItemRatio(5.0, 27.0, 44));//II
         AcceWhiteItemMaxRate.add(new ItemRatio(2.0, 25.0, 90));//III
         AcceWhiteItemMaxRate.add(new ItemRatio(1.5, 20.1, 124));//IV
+        AcceWhiteItemMaxRate.add(new ItemRatio(0, 0, 124));//IV
 
         //녹템 악세
         AcceGreenItemMaxRate.add(new ItemRatio(13.2, 50.7, 25));//15
@@ -298,6 +302,7 @@ public class EnchantItemRatio {
         AcceGreenItemMaxRate.add(new ItemRatio(4.4, 26.4, 44));//II
         AcceGreenItemMaxRate.add(new ItemRatio(1.8, 24.3, 90));//III
         AcceGreenItemMaxRate.add(new ItemRatio(1.3, 19.9, 124));//IV
+        AcceGreenItemMaxRate.add(new ItemRatio(0, 0, 124));//IV
 
         //파템 악세
         AcceBlueItemMaxRate.add(new ItemRatio(11.6, 49.1, 25));//15
@@ -305,12 +310,15 @@ public class EnchantItemRatio {
         AcceBlueItemMaxRate.add(new ItemRatio(3.9, 25.9, 44));//II
         AcceBlueItemMaxRate.add(new ItemRatio(1.5, 24.0, 90));//III
         AcceBlueItemMaxRate.add(new ItemRatio(1.2, 19.8, 124));//IV
+        AcceBlueItemMaxRate.add(new ItemRatio(0, 0, 124));//IV
 
-        AcceYellowItemMaxRate.add(new ItemRatio(9.9, 47.4, 25));//15
+        AcceYellowItemMaxRate.add(new ItemRatio(9.9, 47.4, 25));//0
         AcceYellowItemMaxRate.add(new ItemRatio(5.0, 31.2, 35));//I
         AcceYellowItemMaxRate.add(new ItemRatio(3.3, 25.3, 44));//II
         AcceYellowItemMaxRate.add(new ItemRatio(1.3, 23.8, 90));//III
         AcceYellowItemMaxRate.add(new ItemRatio(1.0, 19.6, 124));//IV
+        AcceYellowItemMaxRate.add(new ItemRatio(0, 0, 124));//IV
+
 
     }
 

@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/enchant_bg"
+    android:id="@+id/enchant_layout"
     tools:context="com.kkk8888.bdosimulator.EnchantActivity">
 
 
     <android.support.v7.widget.CardView
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
@@ -90,6 +91,15 @@
                 app:textStroke="true"
                 app:textStrokeColor="#0000FF"
                 app:textStrokeWidth="2dp" />
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="46dp"
+                android:background="@drawable/btn_enchant"
+                android:onClick="stackReset"
+                android:text="reset"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp" />
 
 
         </LinearLayout>

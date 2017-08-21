@@ -139,6 +139,21 @@ public class EnchantItem {
         this.maxDMG = maxDMG;
     }
 
+    public EnchantItem(String itemType, String imgUrl, int grade, int maxGrade, int minDMG, int maxDMG, int nowGrade, String tableName, String subType, int idForSelect, int gradeID , int itemId) {
+        this.itemType = itemType;
+        this.imgUrl = imgUrl;
+        this.grade = grade;
+        this.maxGrade = maxGrade;
+        this.minDMG = minDMG;
+        this.maxDMG = maxDMG;
+        this.nowGrade = nowGrade;
+        this.tableName = tableName;
+        this.subType = subType;
+        this.idForSelect = idForSelect;
+        this.gradeID = gradeID;
+        this.itemId = itemId;
+    }
+
     public EnchantItem(String itemType, String imgUrl, int grade, int maxGrade, int minDMG, int maxDMG, int nowGrade, String tableName, String subType, int idForSelect, int gradeID) {
         this.itemType = itemType;
         this.imgUrl = imgUrl;

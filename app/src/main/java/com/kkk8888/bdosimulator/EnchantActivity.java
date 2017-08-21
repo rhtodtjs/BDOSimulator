@@ -3,11 +3,18 @@ package com.kkk8888.bdosimulator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
 
 public class EnchantActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,14 +25,17 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     int seleceted = 0;
     int now = 0;
 
+    EnchantItem focusView;
+    EnchantSecond fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_enchant);
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 
         Intent intent = getIntent();
         String classType = intent.getStringExtra("class");
@@ -52,7 +62,6 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(pagerAdapter);
 
-        EnchantFirst fragment = (EnchantFirst) getSupportFragmentManager().findFragmentById(R.id.enchant_frag1);
 
         for (int i = 0; i < 6; i++) {
             OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);
@@ -70,22 +79,46 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         seleceted = Integer.parseInt((stack_0).getText().toString());
 
-        Stack.stack_5 = 145;
-        Stack.stack_2 = 125;
-        Stack.stack_3 = 175;
-        Stack.stack_4 = 245;
-
+        Stack.stack_0 = 0;
+        Stack.stack_1 = 25;
+        Stack.stack_2 = 46;
+        Stack.stack_3 = 68;
+        Stack.stack_4 = 95;
+        Stack.stack_5 = 110;
 
 
         reloadStack();
 
+
+    }
+
+
+    public void stackReset(View v) {
+
+        for (int i = 0; i < 6; i++) {
+            OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);
+            temp.setBackgroundColor(0xffffff);
+        }
+
+        stack_0.setBackgroundResource(R.drawable.item_selected);
+
+        now = 0;
+        seleceted = Stack.stack_0;
+
+        Stack.stack_0 = 0;
+        Stack.stack_1 = 25;
+        Stack.stack_2 = 46;
+        Stack.stack_3 = 68;
+        Stack.stack_4 = 95;
+        Stack.stack_5 = 110;
+
+        reloadStack();
 
 
     }
 
     @Override
     public void onClick(View v) {
-
 
 
         for (int i = 0; i < 6; i++) {
@@ -95,31 +128,35 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         v.setBackgroundResource(R.drawable.item_selected);
 
-
-        switch (v.getId()){
-            case R.id.stack_0 :
+        switch (v.getId()) {
+            case R.id.stack_0:
                 now = 0;
                 seleceted = Stack.stack_0;
+
                 break;
-            case R.id.stack_1 :
+            case R.id.stack_1:
                 now = 1;
                 seleceted = Stack.stack_1;
                 break;
-            case R.id.stack_2 :
+            case R.id.stack_2:
                 now = 2;
                 seleceted = Stack.stack_2;
+
                 break;
-            case R.id.stack_3 :
+            case R.id.stack_3:
                 now = 3;
                 seleceted = Stack.stack_3;
+
                 break;
-            case R.id.stack_4 :
+            case R.id.stack_4:
                 now = 4;
                 seleceted = Stack.stack_4;
+
                 break;
-            case R.id.stack_5 :
+            case R.id.stack_5:
                 now = 5;
                 seleceted = Stack.stack_5;
+
                 break;
         }
 
@@ -128,7 +165,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
     void stackChanged() {
 
-        switch (now){
+        switch (now) {
             case 0:
                 Stack.stack_0 = seleceted;
                 stack_0.setText(Stack.stack_0 + "");
@@ -158,12 +195,23 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    void reloadStack(){
+    void reloadStack() {
         stack_0.setText(Stack.stack_0 + "");
         stack_1.setText(Stack.stack_1 + "");
         stack_2.setText(Stack.stack_2 + "");
         stack_3.setText(Stack.stack_3 + "");
         stack_4.setText(Stack.stack_4 + "");
         stack_5.setText(Stack.stack_5 + "");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BDOS</string>
+    <string name="app_name">검은사막 시뮬레이터</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kakao.kakaotalk.response.KakaoTalkProfile;
 import com.kakao.usermgmt.response.model.UserProfile;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by alfo06-18 on 2017-07-26.
@@ -18,7 +20,7 @@ import com.kakao.usermgmt.response.model.UserProfile;
 
 public class EnchantTip extends Fragment {
 
-    TextView textView;
+    ImageView tip;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,12 +32,11 @@ public class EnchantTip extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_enchant_tip, container, false);
-        textView = (TextView) view.findViewById(R.id.tv_tip);
-        UserProfile userProfile = UserProfile.loadFromCache();
+        tip = (ImageView) view.findViewById(R.id.tip);
+
+        Picasso.with(getContext()).load(R.drawable.cg_tip).into(tip);
 
 
-
-        textView.setText(userProfile.getNickname());
 
 
         return view;
