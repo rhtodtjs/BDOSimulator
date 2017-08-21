@@ -62,6 +62,12 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(pagerAdapter);
 
+//
+//        EnchantSecond enchantSecond = (EnchantSecond) getSupportFragmentManager().getFragments().get(0);
+//
+//        if(enchantSecond != null){
+//            Log.i("오우","널이아니네");
+//        }else Log.i("시팔","널이노");
 
         for (int i = 0; i < 6; i++) {
             OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);

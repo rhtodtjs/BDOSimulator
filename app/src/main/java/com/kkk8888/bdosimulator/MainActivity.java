@@ -93,16 +93,16 @@ public class MainActivity extends AppCompatActivity {
         success_layout = (LinearLayout) findViewById(R.id.success_layout);
         user_nickname = (TextView) findViewById(R.id.user_nickname);
         selectLayout = (LinearLayout) findViewById(R.id.select_panel);
-        selectLayout.setVisibility(View.GONE);
+        selectLayout.setVisibility(View.VISIBLE);
 
 
-        if (Session.getCurrentSession().isOpened()) {
-            requestMe();
-        } else {
-            success_layout.setVisibility(View.GONE);
-            loginButton.setVisibility(View.VISIBLE);
-
-        }
+////        if (Session.getCurrentSession().isOpened()) {
+////            requestMe();
+////        } else {
+//        success_layout.setVisibility(View.GONE);
+//        loginButton.setVisibility(View.GONE);
+//
+////        }
 
     }
 
