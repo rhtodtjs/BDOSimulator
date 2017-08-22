@@ -1,11 +1,13 @@
 package com.kkk8888.bdosimulator;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
@@ -1765,7 +1767,10 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         if (weaponPowerUp(temp)) {
                             temp.success();
+                            Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(200);
                             if (temp.getNowGrade() > 7) mainActivity.seleceted = 0;
+
                         } else {
 
                             if (temp.getNowGrade() >= 0 && temp.getNowGrade() <= 14)
@@ -1785,6 +1790,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         if (bodyPowerUp(temp)) {
                             temp.success();
+                            Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(200);
                             if (temp.getNowGrade() > 5) mainActivity.seleceted = 0;
                         } else {
 
@@ -1805,6 +1812,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         if (accePowerUp(temp)) {
                             temp.success();
+                            Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(200);
                             mainActivity.seleceted = 0;
                         } else {
 
@@ -2002,7 +2011,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                 while (cursor.moveToNext()) {
                     buffer.append(cursor.getString(cursor.getColumnIndex("NAME_KR")));
                     buffer.append("\n");
-//                    _id = cursor.getInt(cursor.getColumnIndex("_id"));
 
                 }
             }
