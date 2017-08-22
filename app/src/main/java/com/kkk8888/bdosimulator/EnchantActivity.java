@@ -6,17 +6,26 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
-public class EnchantActivity extends AppCompatActivity implements View.OnClickListener {
+public class EnchantActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -67,6 +76,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         for (int i = 0; i < 6; i++) {
             OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);
             temp.setOnClickListener(this);
+            temp.setOnLongClickListener(this);
         }
 
         stack_0.setText(Stack.stack_0 + "");
@@ -119,8 +129,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v) {
-
+    public boolean onLongClick(View v) {
 
         for (int i = 0; i < 6; i++) {
             OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);
@@ -128,6 +137,74 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         v.setBackgroundResource(R.drawable.item_selected);
+        getStack(v);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Stack : " + now);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_stack, null);
+        final EditText et_stack = (EditText) view.findViewById(R.id.edit_stack);
+        et_stack.setText(seleceted + "");
+        final Button ok, cancle;
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s.toString().equals("")) return;
+
+                if ((Integer.parseInt(s.toString()) > 300)) {
+
+                    et_stack.setText("300");
+                    Toast.makeText(EnchantActivity.this, "최대 확률은 255를 초과할 수 없습니다.", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        };
+        et_stack.addTextChangedListener(textWatcher);
+
+        ok = (Button) view.findViewById(R.id.btn_ok);
+        cancle = (Button) view.findViewById(R.id.btn_cancle);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                stackChanged(Integer.parseInt(et_stack.getText().toString()));
+                dialog.dismiss();
+
+            }
+        });
+
+
+        if (enchantSecond.focusView != null)
+            enchantSecond.previewRate(enchantSecond.focusView);
+
+        return true;
+    }
+
+    void getStack(View v) {
 
         switch (v.getId()) {
             case R.id.stack_0:
@@ -161,6 +238,21 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+
+
+        for (int i = 0; i < 6; i++) {
+            OutlineTextView temp = (OutlineTextView) findViewById(R.id.stack_0 + i);
+            temp.setBackgroundColor(0xffffff);
+        }
+
+        v.setBackgroundResource(R.drawable.item_selected);
+
+        getStack(v);
+
         if (enchantSecond.focusView != null)
             enchantSecond.previewRate(enchantSecond.focusView);
 
@@ -192,6 +284,40 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case 5:
                 Stack.stack_5 = seleceted;
+                stack_5.setText(Stack.stack_5 + "");
+                break;
+        }
+
+
+    }
+
+    void stackChanged(int editStack) {
+
+        seleceted = editStack;
+
+        switch (now) {
+            case 0:
+                Stack.stack_0 = editStack;
+                stack_0.setText(Stack.stack_0 + "");
+                break;
+            case 1:
+                Stack.stack_1 = editStack;
+                stack_1.setText(Stack.stack_1 + "");
+                break;
+            case 2:
+                Stack.stack_2 = editStack;
+                stack_2.setText(Stack.stack_2 + "");
+                break;
+            case 3:
+                Stack.stack_3 = editStack;
+                stack_3.setText(Stack.stack_3 + "");
+                break;
+            case 4:
+                Stack.stack_4 = editStack;
+                stack_4.setText(Stack.stack_4 + "");
+                break;
+            case 5:
+                Stack.stack_5 = editStack;
                 stack_5.setText(Stack.stack_5 + "");
                 break;
         }

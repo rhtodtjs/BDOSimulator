@@ -1,11 +1,13 @@
 package com.kkk8888.bdosimulator;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
@@ -23,10 +25,12 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -76,6 +80,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
     TextView tv_ratio;
 
+    EnchantItem focusView;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,7 +101,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         mainView = inflater.inflate(R.layout.fragment_enchant_first, container, false);
 
-        getDBfile();
 
 
         db = SQLiteDatabase.openOrCreateDatabase("data/data/com.kkk8888.bdosimulator/databases/itemlist.db", null);
@@ -212,13 +217,39 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         gear_belt.setTag(new EnchantItem("BELT", "null", 0, 0, 0, 0, 0, "악세", "null", R.id.gear_belt_selected, R.id.gear_belt_grade));
 
 
+
+
         ImageView tempView = null;
+        EnchantItem tempItem = null;
 
         for (int i = 0; i < 13; i++) {
             tempView = (ImageView) view.findViewById(R.id.gear_ear1 + i);
             tempView.setOnClickListener(this);
             tempView.setOnLongClickListener(this);
+            tempItem = (EnchantItem) (tempView.getTag());
+            reloadData(tempItem);
+            Picasso.with(getContext()).load(tempItem.getImgUrl()).resize(125, 125).into(tempView);
+
+            ImageView iv = (ImageView) mainView.findViewById(tempItem.getGradeID());
+            switch (tempItem.getGrade()) {
+                case 0:
+                    iv.setImageResource(R.drawable.item_grade_0);
+                    break;
+                case 1:
+                    iv.setImageResource(R.drawable.item_grade_1);
+                    break;
+                case 2:
+                    iv.setImageResource(R.drawable.item_grade_2);
+                    break;
+                case 3:
+                    iv.setImageResource(R.drawable.item_grade_3);
+                    break;
+
+            }
+            iv = null;
         }
+
+        setGrade();
 
         mainActivity = (EnchantActivity) getActivity();
 
@@ -226,40 +257,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     }
 
 
-    void getDBfile() {
-        AssetManager am = this.getResources().getAssets();
 
-
-        File folder = new File("data/data/com.kkk8888.bdosimulator/databases");
-        if (!folder.exists()) {
-            folder.mkdir();
-            Toast.makeText(getContext(), "폴더생성", Toast.LENGTH_SHORT).show();
-        }
-
-        File file = new File("data/data/com.kkk8888.bdosimulator/databases/itemlist.db");
-        try {
-
-            file.createNewFile();
-
-            InputStream is = am.open("data.sqlite");
-            long filesize = is.available();
-
-            byte[] tempdata = new byte[(int) filesize];
-
-            is.read(tempdata);
-
-            is.close();
-
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(tempdata);
-            fos.close();
-            Toast.makeText(getContext(), "데이터베이스 로드 완료", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-
-            Toast.makeText(getContext(), "데이터베이스 로드 에러", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     int[] initAllStat() {
 
@@ -1298,7 +1296,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 temprate = nowRatio + "";
                 temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1323,7 +1321,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 temprate = nowRatio + "";
                 temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1348,7 +1346,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 temprate = nowRatio + "";
                 temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
                 if (nowRatio <= currentRatio) isUp = true;
@@ -1371,7 +1369,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 temprate = nowRatio + "";
                 temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
                 if (nowRatio <= currentRatio) isUp = true;
@@ -1413,7 +1411,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1436,7 +1434,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1459,7 +1457,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1482,7 +1480,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1525,7 +1523,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1548,7 +1546,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1571,7 +1569,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1594,7 +1592,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
 
-                tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
                 Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
 
 
@@ -1703,7 +1701,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         currentRatio = baseRatio + bonusRatio * nowStack;
 
-        tv_ratio.setText("성공율 : " + currentRatio + " 최대 성공율 :" + maxRatio);
+        tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
 
 
     }
@@ -1712,10 +1710,12 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     @Override
     public void onClick(final View v) {
 
-
         EnchantItem item = (EnchantItem) v.getTag();
         gotov.setTag(item);
         enchantGrade.setText("");
+
+
+        focusView = item;
 
         if (item != null) previewRate(item);
 
@@ -1735,7 +1735,10 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                         if (weaponPowerUp(temp)) {
                             temp.success();
+                            Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(200);
                             if (temp.getNowGrade() > 7) mainActivity.seleceted = 0;
+
                         } else {
 
                             if (temp.getNowGrade() >= 0 && temp.getNowGrade() <= 14)
@@ -1755,6 +1758,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                         if (bodyPowerUp(temp)) {
                             temp.success();
+                            Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(200);
                             if (temp.getNowGrade() > 5) mainActivity.seleceted = 0;
                         } else {
 
@@ -1775,6 +1780,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                         if (accePowerUp(temp)) {
                             temp.success();
+                            Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(200);
                             mainActivity.seleceted = 0;
                         } else {
 
@@ -1797,8 +1804,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 if (item != null) {
                     reloadData(temp);
                     previewRate(temp);
-                }
 
+                }
             }
         }
 
@@ -1972,7 +1979,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 while (cursor.moveToNext()) {
                     buffer.append(cursor.getString(cursor.getColumnIndex("NAME_KR")));
                     buffer.append("\n");
-//                    _id = cursor.getInt(cursor.getColumnIndex("_id"));
 
                 }
             }
@@ -2006,4 +2012,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

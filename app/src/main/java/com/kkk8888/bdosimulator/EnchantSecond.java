@@ -101,8 +101,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
         mainView = inflater.inflate(R.layout.fragment_enchant_second, container, false);
 
-        getDBfile();
-
 
         db = SQLiteDatabase.openOrCreateDatabase("data/data/com.kkk8888.bdosimulator/databases/itemlist.db", null);
 
@@ -255,41 +253,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
     }
 
-
-    void getDBfile() {
-        AssetManager am = this.getResources().getAssets();
-
-
-        File folder = new File("data/data/com.kkk8888.bdosimulator/databases");
-        if (!folder.exists()) {
-            folder.mkdir();
-            Toast.makeText(getContext(), "폴더생성", Toast.LENGTH_SHORT).show();
-        }
-
-        File file = new File("data/data/com.kkk8888.bdosimulator/databases/itemlist.db");
-        try {
-
-            file.createNewFile();
-
-            InputStream is = am.open("data.sqlite");
-            long filesize = is.available();
-
-            byte[] tempdata = new byte[(int) filesize];
-
-            is.read(tempdata);
-
-            is.close();
-
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(tempdata);
-            fos.close();
-            Toast.makeText(getContext(), "데이터베이스 로드 완료", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-
-            Toast.makeText(getContext(), "데이터베이스 로드 에러", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     int[] initAllStat() {
 
