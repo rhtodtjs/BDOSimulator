@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Session.getCurrentSession().addCallback(callback);
+        Toast.makeText(this, "gd", Toast.LENGTH_SHORT).show();
 
 
         // 카카오톡 로그인 버튼
