@@ -35,6 +35,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     int now = 0;
 
     EnchantSecond enchantSecond;
+    EnchantFirst enchantFirst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,11 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(pagerAdapter);
 
-        Fragment fragment = pagerAdapter.getItem(2);
 
+        Fragment fragment = pagerAdapter.getItem(2);
         enchantSecond = (EnchantSecond) fragment;
+        fragment = pagerAdapter.getItem(1);
+        enchantFirst = (EnchantFirst) fragment;
 
 
         for (int i = 0; i < 6; i++) {
@@ -92,10 +95,10 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         Stack.stack_0 = 0;
         Stack.stack_1 = 21;
-        Stack.stack_2 = 44;
-        Stack.stack_3 = 58;
-        Stack.stack_4 = 68;
-        Stack.stack_5 = 95;
+        Stack.stack_2 = 31;
+        Stack.stack_3 = 41;
+        Stack.stack_4 = 71;
+        Stack.stack_5 = 81;
 
 
         reloadStack();
@@ -118,10 +121,10 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         Stack.stack_0 = 0;
         Stack.stack_1 = 21;
-        Stack.stack_2 = 44;
-        Stack.stack_3 = 58;
-        Stack.stack_4 = 68;
-        Stack.stack_5 = 95;
+        Stack.stack_2 = 31;
+        Stack.stack_3 = 41;
+        Stack.stack_4 = 71;
+        Stack.stack_5 = 81;
 
         reloadStack();
 
@@ -141,7 +144,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Stack : " + now);
+        builder.setTitle("Stack : " + now + 1);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_stack, null);
         final EditText et_stack = (EditText) view.findViewById(R.id.edit_stack);
         et_stack.setText(seleceted + "");
@@ -159,12 +162,12 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s.toString().equals("")) return;
+                if (s.toString().equals("")) return;
 
-                if ((Integer.parseInt(s.toString()) > 300)) {
+                if ((Integer.parseInt(s.toString()) > 290)) {
 
-                    et_stack.setText("300");
-                    Toast.makeText(EnchantActivity.this, "최대 확률은 255를 초과할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    et_stack.setText("290");
+                    Toast.makeText(EnchantActivity.this, "최대 확률(291)을 초과할 수 없습니다.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -255,6 +258,8 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         if (enchantSecond.focusView != null)
             enchantSecond.previewRate(enchantSecond.focusView);
+        if (enchantFirst.focusView != null)
+            enchantFirst.previewRate(enchantFirst.focusView);
 
 
     }
