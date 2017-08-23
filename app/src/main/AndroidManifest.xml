@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/new_ico"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,8 +30,10 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
 
-        <activity android:name=".SelectcharActivity" />
-        <activity android:name=".EnchantActivity"></activity>
+        <activity android:name=".SelectcharActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EnchantActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
