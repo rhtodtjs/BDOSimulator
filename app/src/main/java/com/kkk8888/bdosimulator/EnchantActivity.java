@@ -144,7 +144,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Stack : " + now + 1);
+        builder.setTitle("Stack : " + (now + 1));
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_stack, null);
         final EditText et_stack = (EditText) view.findViewById(R.id.edit_stack);
         et_stack.setText(seleceted + "");
@@ -200,7 +200,8 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-
+        if (enchantFirst.focusView != null)
+            enchantFirst.previewRate(enchantFirst.focusView);
         if (enchantSecond.focusView != null)
             enchantSecond.previewRate(enchantSecond.focusView);
 
