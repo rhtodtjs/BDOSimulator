@@ -1684,12 +1684,14 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     public void onClick(final View v) {
 
         EnchantItem item = (EnchantItem) v.getTag();
+        if(item == null) return;
         if(item.getImgUrl().equals("null")) {
             onLongClick(v);
             return;
         }
         gotov.setTag(item);
-        enchantGrade.setText("");
+        if (enchantGrade != null) enchantGrade.setText("");
+
 
 
 
