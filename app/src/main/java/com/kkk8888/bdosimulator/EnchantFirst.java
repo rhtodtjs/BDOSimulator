@@ -1,7 +1,6 @@
 package com.kkk8888.bdosimulator;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -24,9 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.stream.JsonReader;
 import com.squareup.picasso.Picasso;
 
 
@@ -35,20 +31,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 
@@ -492,7 +482,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                         Cursor cursor = db.rawQuery(sql2, null);
 
-                        Log.i("이거다", item.getSubType());
 
                         while (cursor.moveToNext()) {
 
@@ -1798,7 +1787,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         }
         gotov.setTag(item);
         enchantGrade.setText("");
-
 
 
         focusView = item;

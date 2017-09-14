@@ -75,7 +75,7 @@ public class EnchantTip extends Fragment {
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(tempdata);
             fos.close();
-            Toast.makeText(getContext(), "데이터베이스 로드 완료", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Load OK..", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
 
             Toast.makeText(getContext(), "데이터베이스 로드 에러", Toast.LENGTH_SHORT).show();
