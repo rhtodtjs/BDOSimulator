@@ -1,0 +1,1123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/enchant_frag1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kkk8888.bdosimulator.EnchantFirst">
+
+    <!--여기서부터 선택된 뷰 이미지-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:background="@drawable/basegear"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/gear_ear1_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="34dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/gear_ear2_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="13dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/gear_shoe_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/gear_belt_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="34dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/gear_helmet_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <ImageView
+                        android:id="@+id/gear_wea_pri_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/gear_wea_awake_selected"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="145dp"
+                    android:src="@drawable/item_selected"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/gear_body_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <ImageView
+                        android:id="@+id/gear_wea_second_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/gear_ring1_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="27dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/gear_ring2_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/gear_glove_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/gear_neck_selected"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/item_selected"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!--여기서부터 실제 아이템 뷰-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/gear_ear1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="34dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_earring" />
+
+                    <ImageView
+                        android:id="@+id/gear_ear2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="13dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_earring" />
+
+                    <ImageView
+                        android:id="@+id/gear_shoe"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_shoes" />
+
+                    <ImageView
+                        android:id="@+id/gear_belt"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="34dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_belt" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/gear_helmet"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_helmet" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <ImageView
+                        android:id="@+id/gear_wea_pri"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_weapon_primary" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/gear_wea_awake"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="145dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ico_weapon_awake" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/gear_body"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_body" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <ImageView
+                        android:id="@+id/gear_wea_second"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_weapon_secondary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/gear_ring1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="27dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_ring" />
+
+                    <ImageView
+                        android:id="@+id/gear_ring2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_ring" />
+
+                    <ImageView
+                        android:id="@+id/gear_glove"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_gloves" />
+
+                    <ImageView
+                        android:id="@+id/gear_neck"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ico_necklace" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!--여기까지 아이템 뷰 -->
+
+
+    <!--여기부터 강화 단계 뷰-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_ear1_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="34dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_ear2_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="13dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_shoe_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_belt_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="34dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_helmet_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_wea_pri_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <com.kkk8888.bdosimulator.OutlineTextView
+                    android:id="@+id/gear_wea_awake_nowgrade"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="145dp"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:textStroke="true"
+                    app:textStrokeColor="#FF0000"
+                    app:textStrokeWidth="2.7dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_body_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_wea_second_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_ring1_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="27dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_ring2_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_glove_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                    <com.kkk8888.bdosimulator.OutlineTextView
+                        android:id="@+id/gear_neck_nowgrade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:typeface="normal"
+                        app:textStroke="true"
+                        app:textStrokeColor="#FF0000"
+                        app:textStrokeWidth="2.7dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--여기부터 아이템 등급 뷰-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/gear_ear1_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="34dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <ImageView
+                        android:id="@+id/gear_ear2_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="13dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <ImageView
+                        android:id="@+id/gear_shoe_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <ImageView
+                        android:id="@+id/gear_belt_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="34dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/gear_helmet_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <ImageView
+                        android:id="@+id/gear_wea_pri_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/gear_wea_awake_grade"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="145dp"
+                    android:gravity="center"
+                    android:src="@drawable/item_grade_0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:weightSum="11">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/gear_body_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2.70" />
+
+                    <ImageView
+                        android:id="@+id/gear_wea_second_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/gear_ring1_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="27dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <ImageView
+                        android:id="@+id/gear_ring2_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                    <ImageView
+                        android:id="@+id/gear_glove_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/item_grade_0" />
+
+                    <ImageView
+                        android:id="@+id/gear_neck_grade"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:src="@drawable/item_grade_0" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/searchBtn"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:iconifiedByDefault="false"
+            android:visibility="invisible">
+
+        </android.support.v7.widget.SearchView>
+
+        <ListView
+            android:id="@+id/itemlist"
+            android:layout_width="220dp"
+            android:layout_height="210dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"></ListView>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp">
+
+        <ImageView
+            android:id="@+id/needItem"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="64dp"
+            android:src="@drawable/ohsit" />
+
+        <ImageView
+            android:id="@+id/enchantItem"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="64dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ohsit" />
+
+        <com.kkk8888.bdosimulator.OutlineTextView
+            android:id="@+id/enchantGrade"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="64dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:typeface="normal"
+            app:textStroke="true"
+            app:textStrokeColor="#FF0000"
+            app:textStrokeWidth="2.7dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/enchant_bar" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="46dp"
+            android:src="@drawable/bg_enchanting_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="66dp"
+            android:src="@drawable/bg_enchanting_left_bot" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="74dp"
+            android:layout_marginLeft="66dp"
+            android:src="@drawable/bg_enchanting_left_top" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="65dp"
+            android:src="@drawable/bg_enchanting_right_bot" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="72dp"
+            android:layout_marginRight="65dp"
+            android:src="@drawable/bg_enchanting_right_top" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/bg_enchanting_right" />
+
+        <Button
+            android:id="@+id/gotov"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_gotov"
+            android:onClick="enchantItem2"
+            android:text="잠재력 돌파"
+            android:textColor="#cbcbcb"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal"
+            android:weightSum="9">
+
+
+            <TextView
+                android:id="@+id/ap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="공격력"
+                android:textColor="#88ff00"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/wap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="각성 공격력"
+                android:textColor="#88ff00"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="방어력"
+                android:textColor="#88ff00"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ratio"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/linear"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

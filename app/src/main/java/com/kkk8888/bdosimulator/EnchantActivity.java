@@ -189,7 +189,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                 dialog.dismiss();
             }
         });
-
+//
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
