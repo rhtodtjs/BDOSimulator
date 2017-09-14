@@ -23,13 +23,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.stream.JsonReader;
 import com.squareup.picasso.Picasso;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -105,6 +123,9 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         db = SQLiteDatabase.openOrCreateDatabase("data/data/com.kkk8888.bdosimulator/databases/itemlist.db", null);
 
         settingView(mainView);
+
+
+        loadSave();
 
 
         return mainView;
@@ -307,6 +328,85 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
 
         }
+
+
+    }
+
+    void loadSave() {
+        String dir = getActivity().getApplicationContext().getFilesDir().getPath();
+        File save = new File(dir + "/" + classType + ".dat");
+        StringBuffer sb = null;
+
+        if (!save.exists()) {
+            Toast.makeText(mainActivity, "저장파일이 없습니다" + save.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+
+            InputStream is = getActivity().openFileInput(classType + ".dat");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String line = br.readLine();
+            sb = new StringBuffer();
+
+            while (line != null) {
+                sb.append(line);
+                line = br.readLine();
+
+            }
+
+
+            Gson gson = new Gson();
+
+            JSONArray obj = new JSONArray(sb.toString());
+
+            for (int i = 0; i < obj.length(); i++) {
+                JSONObject sibal = obj.getJSONObject(i);
+                ImageView temp = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+                EnchantItem temp2 = gson.fromJson(sibal.toString(), EnchantItem.class);
+                temp.setTag(temp2);
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        ImageView tempView = null;
+        EnchantItem tempItem = null;
+
+        for (int i = 0; i < 13; i++) {
+            tempView = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+            tempItem = (EnchantItem) (tempView.getTag());
+            reloadData(tempItem);
+            if (tempItem.getImgUrl().equals("null")) continue;
+            Picasso.with(getContext()).load(tempItem.getImgUrl()).resize(125, 125).into(tempView);
+
+            ImageView iv = (ImageView) mainView.findViewById(tempItem.getGradeID());
+            switch (tempItem.getGrade()) {
+                case 0:
+                    iv.setImageResource(R.drawable.item_grade_0);
+                    break;
+                case 1:
+                    iv.setImageResource(R.drawable.item_grade_1);
+                    break;
+                case 2:
+                    iv.setImageResource(R.drawable.item_grade_2);
+                    break;
+                case 3:
+                    iv.setImageResource(R.drawable.item_grade_3);
+                    break;
+
+            }
+            iv = null;
+        }
+
+        setGrade();
 
 
     }
@@ -1683,8 +1783,16 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     @Override
     public void onClick(final View v) {
 
+        searchView.setVisibility(View.INVISIBLE);
+        searchView.setQuery("", true);
+        searchView.setIconified(true);
+
+
         EnchantItem item = (EnchantItem) v.getTag();
-        if(item.getImgUrl().equals("null")) {
+
+        if (item == null) return;
+
+        if (item.getImgUrl().equals("null")) {
             onLongClick(v);
             return;
         }
@@ -1785,6 +1893,36 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 }
             }
+        }
+
+
+        Gson gson = new Gson();
+
+        String dir = getActivity().getApplicationContext().getFilesDir().getPath();
+        File save = new File(dir + "/" + classType + ".dat");
+        try {
+            save.createNewFile();
+            FileOutputStream fos = new FileOutputStream(save);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+
+            osw.append('[');
+            for (int i = 0; i < 13; i++) {
+                ImageView temp = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+                osw.append(gson.toJson(temp.getTag()));
+                if (i < 12) {
+                    osw.append(',');
+                }
+
+
+            }
+            osw.append(']');
+
+            osw.flush();
+            osw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(mainActivity, "자료 저장에 실패하였습니다. 오류코드 : " + e.toString(), Toast.LENGTH_SHORT).show();
         }
 
 

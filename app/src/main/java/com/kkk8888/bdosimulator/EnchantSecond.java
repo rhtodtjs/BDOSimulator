@@ -1705,6 +1705,12 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
     @Override
     public void onClick(final View v) {
 
+
+        searchView.setVisibility(View.INVISIBLE);
+        searchView.setQuery("", true);
+        searchView.setIconified(true);
+
+
         EnchantItem item = (EnchantItem) v.getTag();
         gotov.setTag(item);
         enchantGrade.setText("");

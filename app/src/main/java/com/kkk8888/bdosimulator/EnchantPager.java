@@ -45,8 +45,6 @@ public class EnchantPager extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
-
         return fragments[position];
     }
 

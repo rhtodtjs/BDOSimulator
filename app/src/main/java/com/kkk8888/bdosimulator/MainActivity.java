@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
         selectLayout.setVisibility(View.VISIBLE);
 
 
-////        if (Session.getCurrentSession().isOpened()) {
-////            requestMe();
-////        } else {
-//        success_layout.setVisibility(View.GONE);
-//        loginButton.setVisibility(View.GONE);
-//
-////        }
+        if (Session.getCurrentSession().isOpened()) {
+            requestMe();
+        } else {
+            success_layout.setVisibility(View.GONE);
+            loginButton.setVisibility(View.GONE);
+
+        }
 
     }
 
