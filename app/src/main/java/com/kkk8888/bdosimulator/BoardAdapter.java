@@ -46,7 +46,9 @@ public class BoardAdapter extends RecyclerView.Adapter {
             h.text.setTextColor(Color.RED);
             h.text.setTextSize(15.1f);
             h.writer.setTextColor(Color.RED);
-        }// else //h.text.setTextColor(0xBCE55C);
+        } else{
+            h.text.setTextColor(0xE5D85C);
+        }
         h.text.setText(board.get(position).getText());
         Picasso.with(mContext).load("http://ec2-52-78-134-69.ap-northeast-2.compute.amazonaws.com/" + board.get(position).getImgUrl()).resize(110, 70).into(h.little);
 
