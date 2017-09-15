@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 public class EnchantPager extends FragmentPagerAdapter {
 
 
-    Fragment[] fragments = new Fragment[3];
-    String[] title = new String[]{"사용 안내", "기어 1", "기어 2"};
+    Fragment[] fragments = new Fragment[4];
+    String[] title = new String[]{"사용 안내", "기어 1", "기어 2", "게시판"};
 
 
     public EnchantPager(FragmentManager fm, String classType) {
@@ -25,15 +25,13 @@ public class EnchantPager extends FragmentPagerAdapter {
         bundle.putString("classType", classType); // putString(String key, String value)
 
 
-
         fragments[0] = new EnchantTip();
         fragments[0].setArguments(bundle);
         fragments[1] = new EnchantFirst();
         fragments[1].setArguments(bundle);
         fragments[2] = new EnchantSecond();
         fragments[2].setArguments(bundle);
-//        fragments[3] = new EnchantTip();
-//        fragments[3].setArguments(bundle);
+        fragments[3] = new EnchantNotice();
 
 
     }
@@ -45,6 +43,8 @@ public class EnchantPager extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
+
         return fragments[position];
     }
 

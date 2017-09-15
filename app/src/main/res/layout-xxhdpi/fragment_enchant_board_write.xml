@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="#44cbcbcb"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="50dp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="OOO님" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="제목..."
+        android:inputType="text"
+        android:maxLength="12" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+        <ImageView
+            android:id="@+id/edit_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/pickup" />
+    </ScrollView>
+
+
+    <EditText
+        android:id="@+id/edit_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:maxLength="100"
+        android:hint="본문을 작성해주세요..."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/write_add"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_enchant"
+            android:text="확인" />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/write_cancle"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_enchant"
+            android:text="취소" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

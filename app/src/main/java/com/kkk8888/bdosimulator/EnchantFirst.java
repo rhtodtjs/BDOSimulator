@@ -91,6 +91,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     EnchantItem focusView;
 
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -328,7 +330,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         StringBuffer sb = null;
 
         if (!save.exists()) {
-            Toast.makeText(mainActivity, "저장파일이 없습니다" + save.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainActivity, "저장된 정보가 없습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 
