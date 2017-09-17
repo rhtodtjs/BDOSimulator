@@ -91,8 +91,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     EnchantItem focusView;
 
 
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -236,8 +234,10 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             tempView = (ImageView) view.findViewById(R.id.gear_ear1 + i);
             tempView.setOnClickListener(this);
             tempView.setOnLongClickListener(this);
+            //Log.i("123",R.id.gear_ear1+i+"");
 
         }
+
 
         mainActivity = (EnchantActivity) getActivity();
 
@@ -347,6 +347,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
             }
 
+            Log.i("제이슨", sb.toString());
 
             Gson gson = new Gson();
 
@@ -411,7 +412,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EnchantItem item = (EnchantItem) v.getTag();
                 ImageView image = (ImageView) v;
-                String loadImg = "";
+                String loadImg;
                 String sql = "select * from db_items_base where `NAME_KR` = '" + searcheditem.get(position).getItemName() + "'";
 
                 if (db.isOpen()) {
@@ -826,6 +827,25 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 else item.setBaseAp(0);
                                 item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
                                 item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
+                            } else if (item.getSubType().equals("ELFSWORD")) {
+                                String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                                String[] sibal2 = sibal.split("\\+");
+                                if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                                else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                                else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                                else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                                else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                                else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                                else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                                else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                                else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                                else item.setBaseAp(3);
+                                item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                            } else if (item.getSubType().equals("VEDIANT")) {
+                                String sibal = cursor.getString(cursor.getColumnIndex("RDD"));
+                                String[] sibal2 = sibal.split("\\+");
+                                item.setBaseAp(5);
+                                item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                             }
 
                             item.setNeedItemID(cursor.getInt(cursor.getColumnIndex("NeedEnchantItemID")));
@@ -1291,6 +1311,25 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                         else item.setBaseAp(0);
                         item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
                         item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
+                    } else if (item.getSubType().equals("ELFSWORD")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("MDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        if (sibal2[0].equals("1D3")) item.setBaseAp(2);
+                        else if (sibal2[0].equals("1D5")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D6")) item.setBaseAp(3);
+                        else if (sibal2[0].equals("1D7")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D8")) item.setBaseAp(4);
+                        else if (sibal2[0].equals("1D9")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D10")) item.setBaseAp(5);
+                        else if (sibal2[0].equals("1D15")) item.setBaseAp(8);
+                        else if (sibal2[0].equals("1D19")) item.setBaseAp(10);
+                        else item.setBaseAp(3);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
+                    } else if (item.getSubType().equals("VEDIANT")) {
+                        String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
+                        String[] sibal2 = sibal.split("\\+");
+                        item.setBaseAp(5);
+                        item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                     }
                 }//
 
@@ -1761,8 +1800,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         }
 
 
-        //Log.i("치트", item.getImgUrl() + " , " + item.getGrade() + " , " + item.getMaxGrade() + " , " + item.getTableName() + " , " + item.getSubType() + " , " + item.getItemId());
-
         currentRatio = baseRatio + bonusRatio * nowStack;
 
         tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
@@ -1781,6 +1818,8 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         EnchantItem item = (EnchantItem) v.getTag();
 
+        Log.i("키값", item.getSubType() + classType);
+
         if (item == null) return;
 
         if (item.getImgUrl().equals("null")) {
@@ -1793,7 +1832,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         focusView = item;
 
-        if (item != null) previewRate(item);
+        previewRate(item);
 
 
         if (v instanceof Button) {
@@ -2062,17 +2101,25 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 } else if (Type.equals("W_AWAKE")) {
                     itemType = "SPHERE2";
                 } else itemType = "DAGGER";
+            } else if (subType.equals("darkelf")) {
+                if (Type.equals("W_PRI")) {
+                    itemType = "ELFSWORD";
+                } else if (Type.equals("W_AWAKE")) {
+                    itemType = "VEDIANT";
+                } else itemType = "ORNAMENT";
             }
+
+            Log.i("씨발뭐지", itemType);
 
 
             String sql = "";
             if (Type.equals("W_PRI") || Type.equals("W_AWAKE") || Type.equals("W_SECOND")) {
                 //검색하려는 아이템 종류가 무기류 인경우..
-                sql = "select * from db_items_base where `TYPE` = 'WEAPON' and `SUBTYPE` = '" + itemType + "' and `SEARCHDATA` LIKE '%" + search +
+                sql = "select * from db_items_base where `TYPE` = 'WEAPON' and `SUBTYPE` = '" + itemType + "' and `NAME_KR` LIKE '%" + search +
                         "%'";
             } else {
                 //검색하려는 아이템 종류가 무기가 아닌경우..
-                sql = "select * from db_items_base where `SUBTYPE` = '" + Type + "' and `SEARCHDATA` LIKE '%" + search +
+                sql = "select * from db_items_base where `SUBTYPE` = '" + Type + "' and `NAME_KR` LIKE '%" + search +
                         "%'";
             }
             buffer = new StringBuffer();

@@ -1,9 +1,9 @@
 package com.kkk8888.bdosimulator;
 
-import android.*;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,21 +19,20 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+
 
 
 public class EnchantActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
@@ -53,6 +51,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     FloatingActionButton fab;
 
     View rootView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,6 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                         String filename = new SimpleDateFormat("yyyyMMdd_HHmmss_").format(new Date()) + "bdo.jpg";
                         store(bm, filename);
 
-                        //shareImage(file);
 
                     }
                 }
@@ -147,6 +145,8 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
 
         reloadStack();
+
+        getDBfile();
 
 
     }
@@ -474,6 +474,45 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         screenView.setDrawingCacheEnabled(false);
         return bitmap;
+    }
+
+
+    void getDBfile() {
+        AssetManager am = this.getResources().getAssets();
+
+
+        File folder = new File("data/data/com.kkk8888.bdosimulator/databases");
+        if (!folder.exists()) {
+            folder.mkdir();
+            Toast.makeText(this, "폴더생성", Toast.LENGTH_SHORT).show();
+        }
+
+        File file = new File("data/data/com.kkk8888.bdosimulator/databases/itemlist.db");
+        try {
+
+            if(file.exists()){
+                file.delete();
+                Toast.makeText(this, "기존 파일을 지웠고.", Toast.LENGTH_SHORT).show();
+            }
+
+            InputStream is = am.open("data.seq");
+            long filesize = is.available();
+
+            byte[] tempdata = new byte[(int) filesize];
+
+            is.read(tempdata);
+
+            is.close();
+
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(tempdata);
+            fos.close();
+            Toast.makeText(this, "Load OK..", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+
+            Toast.makeText(this, "데이터베이스 로드 에러", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 

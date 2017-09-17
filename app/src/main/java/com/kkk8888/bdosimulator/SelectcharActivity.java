@@ -2,6 +2,7 @@ package com.kkk8888.bdosimulator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,11 @@ public class SelectcharActivity extends AppCompatActivity {
         charType.add(new CharInfomation("닌자", "ninza", R.drawable.slide_ninja));
         charType.add(new CharInfomation("위치", "witch", R.drawable.slide_witch));
         charType.add(new CharInfomation("위자드", "wizard", R.drawable.slide_wizard));
+        charType.add(new CharInfomation("다크나이트", "darkelf", R.drawable.slide_darkelf));
 
+        for(int i = 0 ; i < charType.size() ; i++){
+            Log.i("씨팔",charType.get(i).getName() + charType.get(i).getDESC());
+        }
 
         gridView.setAdapter(adapter);
     }

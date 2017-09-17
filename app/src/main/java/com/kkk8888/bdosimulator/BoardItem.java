@@ -6,7 +6,7 @@ package com.kkk8888.bdosimulator;
 
 public class BoardItem {
 
-    private String writer, text, content, imgUrl;
+    private String writer, text, content, imgUrl, GM;
 
     public String getContent() {
         return content;
@@ -24,11 +24,20 @@ public class BoardItem {
         this.imgUrl = imgUrl;
     }
 
-    public BoardItem(String writer, String text, String content, String imgUrl) {
+    public String getGM() {
+        return GM;
+    }
+
+    public void setGM(String GM) {
+        this.GM = GM;
+    }
+
+    public BoardItem(String writer, String text, String content, String imgUrl , String GM) {
         this.writer = writer;
         this.text = text;
         this.content = content;
         this.imgUrl = imgUrl;
+        this.GM = GM;
     }
 
     public String getWriter() {

@@ -52,11 +52,20 @@
             </LinearLayout>
 
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/boardList"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"></android.support.v7.widget.RecyclerView>
+                android:layout_marginTop="40dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/boardList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ></android.support.v7.widget.RecyclerView>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
 
         </android.support.v7.widget.CardView>
 
@@ -117,7 +126,7 @@
             android:layout_width="140dp"
             android:layout_height="120dp"
             android:gravity="center"
-            android:text="업로드 중입니다. \n잠시만 기다려주세요.."
+            android:text="진행중 입니다.. \n잠시만 기다려주세요."
             android:textColor="#F29661"
             android:textStyle="bold"
             app:textStroke="true"

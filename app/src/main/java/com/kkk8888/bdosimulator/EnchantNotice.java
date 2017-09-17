@@ -2,6 +2,7 @@ package com.kkk8888.bdosimulator;
 
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,16 +11,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,6 +48,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.VIBRATOR_SERVICE;
 
 /**
  * Created by alfo06-18 on 2017-07-26.
@@ -72,6 +79,11 @@ public class EnchantNotice extends Fragment {
 
     LinearLayout bar;
 
+    final static long cooltime = 3000;
+    long ltb;
+
+    SwipeRefreshLayout swipe;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,23 +92,29 @@ public class EnchantNotice extends Fragment {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            bar.setVisibility(View.GONE);
-            loadBoard();
+
+            switch (msg.what) {
+                case 0:
+                    bar.setVisibility(View.GONE);
+                    loadBoard();
+                    break;
+                case 1:
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_PICK);
+                    intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 10);
+                    pickup.setClickable(true);
+                    break;
+                case 2:
+                    bar.setVisibility(View.GONE);
+                    break;
+            }
+
+
         }
     };
 
-    Handler handler2 = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_PICK);
-            intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, 10);
-            pickup.setClickable(true);
-        }
-    };
+
 
     @Nullable
     @Override
@@ -115,11 +133,21 @@ public class EnchantNotice extends Fragment {
 
         bar.setVisibility(View.GONE);
 
+        swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // board.clear();
+                loadBoard();
+                bar.setVisibility(View.VISIBLE);
+            }
+        });
+
 
         loadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                board.clear();
+                //board.clear();
                 loadBoard();
             }
         });
@@ -240,7 +268,7 @@ public class EnchantNotice extends Fragment {
                         //내폰에있느 ㄴ이미지를 선택해야해해
                         //사진 목록을 보여주는 앱(갤러리,사진)의 화면을 불러야해
 
-                        handler2.sendEmptyMessageDelayed(0, 2000);
+                        handler.sendEmptyMessageDelayed(1, 2000);
 
 
                     }
@@ -306,6 +334,23 @@ public class EnchantNotice extends Fragment {
 
     void loadBoard() {
 
+
+        if (System.currentTimeMillis() - ltb < cooltime) {
+
+            Toast.makeText(getContext(), "잠시후 다시 시도해주세요", Toast.LENGTH_SHORT).show();
+            swipe.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake));
+            Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(300);
+            swipe.setRefreshing(false);
+            handler.sendEmptyMessageDelayed(2, 300);
+
+            return;
+        }
+
+        ltb = System.currentTimeMillis();
+
+        boardList.setAdapter(null);
+
         board.clear();
 
         queue = Volley.newRequestQueue(getContext());
@@ -321,20 +366,26 @@ public class EnchantNotice extends Fragment {
 
                     if (unitStrs.length < 4) continue;
 
-                    if (unitStrs[0].equals("공지사항")) {
-                        board.add(0, new BoardItem(unitStrs[0], unitStrs[1], unitStrs[2], unitStrs[3]));
+                    if (unitStrs[4].equals("1")) {
+                        board.add(0, new BoardItem(unitStrs[0], unitStrs[1], unitStrs[2], unitStrs[3], unitStrs[4]));
 
                     } else {
-                        board.add(new BoardItem(unitStrs[0], unitStrs[1], unitStrs[2], unitStrs[3]));
+                        board.add(new BoardItem(unitStrs[0], unitStrs[1], unitStrs[2], unitStrs[3], unitStrs[4]));
 
                     }
+
+                    //Log.i("시발",unitStrs[i]);
                 }
 
 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         adapter.notifyDataSetChanged();
+                        swipe.setRefreshing(false);
+                        boardList.setAdapter(adapter);
+                        bar.setVisibility(View.GONE);
                     }
                 });
 
@@ -348,6 +399,7 @@ public class EnchantNotice extends Fragment {
         });
 
         queue.add(request);
+
 
     }
 
