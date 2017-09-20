@@ -347,7 +347,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
             }
 
-            Log.i("제이슨", sb.toString());
+            //Log.i("제이슨", sb.toString());
 
             Gson gson = new Gson();
 
@@ -466,7 +466,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                         Cursor cursor = db.rawQuery(sql2, null);
 
-
                         while (cursor.moveToNext()) {
 
 
@@ -480,11 +479,15 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 } else if (item.getTableName().equals("무기")) {
 
-                    String sql2 = "select * from LongSword where `_id` = '" + searcheditem.get(position)._id + "' and `Enchant` = '" + item.getNowGrade() + "'";
+                    String sql2 = "select * from LongSword where `_id` = '" + searcheditem.get(position)._id + "'  and `Enchant` = '" + item.getNowGrade()+"'";
+                    //String sql2 = "select * from LongSword where `_id` = " +
+                           // searcheditem.get(position).get_id() + "";
+
                     if (db.isOpen()) {
 
                         Cursor cursor = db.rawQuery(sql2, null);
 
+                       // Log.i("빵구", searcheditem.get(position)._id + "," + cursor.getCount() + ", " + item.getNowGrade());
 
                         while (cursor.moveToNext()) {
 
@@ -842,7 +845,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                                 else item.setBaseAp(3);
                                 item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
                             } else if (item.getSubType().equals("VEDIANT")) {
-                                String sibal = cursor.getString(cursor.getColumnIndex("RDD"));
+                                String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
                                 String[] sibal2 = sibal.split("\\+");
                                 item.setBaseAp(5);
                                 item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
@@ -1818,7 +1821,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         EnchantItem item = (EnchantItem) v.getTag();
 
-        Log.i("키값", item.getSubType() + classType);
+       // Log.i("키값", item.getSubType() + classType);
 
         if (item == null) return;
 

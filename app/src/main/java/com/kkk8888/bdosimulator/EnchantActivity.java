@@ -26,6 +26,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -52,6 +55,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
     View rootView;
 
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +121,13 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         enchantSecond = (EnchantSecond) fragment;
         fragment = pagerAdapter.getItem(1);
         enchantFirst = (EnchantFirst) fragment;
+
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-6889610294217373/9686193383");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+
 
 
         for (int i = 0; i < 6; i++) {
@@ -410,6 +421,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         if (System.currentTimeMillis() - ltb <= 1500) {
 
+            mInterstitialAd.show();
             finish();
             return;
         }
@@ -484,7 +496,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         File folder = new File("data/data/com.kkk8888.bdosimulator/databases");
         if (!folder.exists()) {
             folder.mkdir();
-            Toast.makeText(this, "폴더생성", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "폴더생성", Toast.LENGTH_SHORT).show();
         }
 
         File file = new File("data/data/com.kkk8888.bdosimulator/databases/itemlist.db");
@@ -492,10 +504,10 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
             if(file.exists()){
                 file.delete();
-                Toast.makeText(this, "기존 파일을 지웠고.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "기존 파일을 지웠고..", Toast.LENGTH_SHORT).show();
             }
 
-            InputStream is = am.open("data.seq");
+            InputStream is = am.open("data.db");
             long filesize = is.available();
 
             byte[] tempdata = new byte[(int) filesize];

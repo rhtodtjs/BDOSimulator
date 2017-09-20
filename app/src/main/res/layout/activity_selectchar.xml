@@ -4,17 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context="com.kkk8888.bdosimulator.SelectcharActivity">
 
 
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:horizontalSpacing="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:horizontalSpacing="1.5dp"
         android:numColumns="4"
-        android:verticalSpacing="1dp">
+        android:verticalSpacing="1.5dp">
 
     </GridView>
+
+    <!--<com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/adView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--ads:adSize="BANNER"-->
+        <!--ads:adUnitId="ca-app-pub-6889610294217373/9686193383"></com.google.android.gms.ads.AdView>-->
 
 </LinearLayout>

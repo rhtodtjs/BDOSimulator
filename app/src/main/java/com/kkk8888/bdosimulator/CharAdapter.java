@@ -24,6 +24,7 @@ public class CharAdapter extends BaseAdapter {
     Context mContext;
     ArrayList<CharInfomation> charType;
 
+
     public CharAdapter(Context mContext, ArrayList<CharInfomation> charType) {
         this.mContext = mContext;
         this.charType = charType;
@@ -48,7 +49,7 @@ public class CharAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
 
-        if (convertView == null) {
+       //if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.char_item, parent, false);
 
             TextView charName = (TextView) convertView.findViewById(R.id.charName);
@@ -65,7 +66,7 @@ public class CharAdapter extends BaseAdapter {
                     mContext.startActivity(intent);
                 }
             });
-        }
+       // }
         return convertView;
     }
 }

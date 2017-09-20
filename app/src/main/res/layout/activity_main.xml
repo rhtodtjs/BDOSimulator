@@ -12,8 +12,8 @@
     <LinearLayout
         android:id="@+id/success_layout"
         android:layout_width="wrap_content"
-        android:visibility="invisible"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/user_nickname"
@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:visibility="visible"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="120dp"
+        android:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/select_panel"
@@ -69,6 +69,16 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6889610294217373/8757799683"></com.google.android.gms.ads.AdView>
 
 
 </RelativeLayout>
