@@ -6,12 +6,17 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.FloatingActionButton;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +42,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 
 public class EnchantActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
@@ -51,11 +59,16 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     EnchantSecond enchantSecond;
     EnchantFirst enchantFirst;
 
-    FloatingActionButton fab;
+    //FloatingActionButton fab;
+    FloatingActionButton actionA, actionB, actionC;
 
     View rootView;
 
     private InterstitialAd mInterstitialAd;
+    String classType;
+
+
+    View black;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +80,11 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
 
         Intent intent = getIntent();
-        String classType = intent.getStringExtra("class");
+        classType = intent.getStringExtra("class");
+
+        black = findViewById(R.id.black);
+        black.setClickable(false);
+
 
 
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
@@ -75,30 +92,6 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
-
-                    } else {
-                        Bitmap bm = getScreenShot(rootView);
-                        Toast.makeText(EnchantActivity.this, "캡처 화면이 저장되었습니다.", Toast.LENGTH_SHORT).show();
-                        String filename = new SimpleDateFormat("yyyyMMdd_HHmmss_").format(new Date()) + "bdo.jpg";
-                        store(bm, filename);
-
-
-                    }
-                }
-
-            }
-        });
 
 
         stack_0 = (OutlineTextView) findViewById(R.id.stack_0);
@@ -126,8 +119,6 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-6889610294217373/9686193383");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-
 
 
         for (int i = 0; i < 6; i++) {
@@ -159,8 +150,130 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         getDBfile();
 
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        menuMultipleActions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(EnchantActivity.this, "뭘눌러보노.,.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        black.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                menuMultipleActions.collapse();
+//                black.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        if(menuMultipleActions.isExpanded()) black.setVisibility(View.VISIBLE);
+//        else black.setVisibility(View.GONE);
+
+
+
+        actionA = (FloatingActionButton) findViewById(R.id.action_a);
+        actionB = (FloatingActionButton) findViewById(R.id.action_b);
+        actionC = (FloatingActionButton) findViewById(R.id.action_c);
+
+
+        actionA.setOnClickListener(new View.OnClickListener() {
+            //화면 캡처 버튼
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
+
+                    } else {
+                        Bitmap bm = getScreenShot(rootView);
+                        Toast.makeText(EnchantActivity.this, "캡처 화면이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                        String filename = new SimpleDateFormat("yyyyMMdd_HHmmss_").format(new Date()) + "bdo.jpg";
+                        store(bm, filename);
+
+
+                    }
+                }
+                menuMultipleActions.collapse();
+                black.setVisibility(View.GONE);
+
+
+            }
+        });
+
+
+        actionB.setOnClickListener(new View.OnClickListener() {
+            //기어1 데이터 삭제
+            @Override
+            public void onClick(View view) {
+
+                String dir = getApplicationContext().getFilesDir().getPath();
+                File save = new File(dir + "/" + classType + ".dat");
+
+                if (save.exists()) {
+                    Toast.makeText(EnchantActivity.this, "기어1의 저장데이터를 삭제중입니다.. 잠시만 기다려주세요", Toast.LENGTH_SHORT).show();
+                    save.delete();
+                    handler.sendEmptyMessageDelayed(0, 1000);
+                } else {
+                    Toast.makeText(EnchantActivity.this, "초기화 할 데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
+                menuMultipleActions.collapse();
+                black.setVisibility(View.GONE);
+
+            }
+        });
+
+
+        //actionC = new FloatingActionButton(getBaseContext());
+        actionC.setOnClickListener(new View.OnClickListener() {
+            //기어2 데이터 삭제
+            @Override
+            public void onClick(View v) {
+
+                String dir = getApplicationContext().getFilesDir().getPath();
+                File save = new File(dir + "/" + classType + "2.dat");
+
+                if (save.exists()) {
+                    Toast.makeText(EnchantActivity.this, "기어2의 저장데이터를 삭제중입니다.. 잠시만 기다려주세요", Toast.LENGTH_SHORT).show();
+                    save.delete();
+                    handler.sendEmptyMessageDelayed(1, 1000);
+                } else {
+                    Toast.makeText(EnchantActivity.this, "초기화 할 데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
+
+                menuMultipleActions.collapse();
+                black.setVisibility(View.GONE);
+
+
+            }
+        });
+
+//        menuMultipleActions.addButton(actionA);
+//        menuMultipleActions.addButton(actionB);
+//        menuMultipleActions.addButton(actionC);
 
     }
+
+    Handler handler = new Handler() {
+
+        FragmentTransaction ft;
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case 0:
+                    ft = pagerAdapter.getItem(1).getFragmentManager().beginTransaction();
+                    ft.detach(enchantFirst).attach(enchantFirst).commit();
+                    break;
+                case 1:
+                    enchantSecond.callGearItem(enchantSecond.mainView);
+                    ft = pagerAdapter.getItem(2).getFragmentManager().beginTransaction();
+                    ft.detach(enchantSecond).attach(enchantSecond).commit();
+                    break;
+            }
+
+        }
+    };
 
 
     public void stackReset(View v) {
@@ -421,7 +534,12 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         if (System.currentTimeMillis() - ltb <= 1500) {
 
-            mInterstitialAd.show();
+            if (System.currentTimeMillis() % 3 == 0) {
+
+                mInterstitialAd.show();
+
+            }
+
             finish();
             return;
         }
@@ -502,9 +620,9 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         File file = new File("data/data/com.kkk8888.bdosimulator/databases/itemlist.db");
         try {
 
-            if(file.exists()){
+            if (file.exists()) {
                 file.delete();
-                Toast.makeText(this, "기존 파일을 지웠고..", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "기존 파일을 지웠고..", Toast.LENGTH_SHORT).show();
             }
 
             InputStream is = am.open("data.db");

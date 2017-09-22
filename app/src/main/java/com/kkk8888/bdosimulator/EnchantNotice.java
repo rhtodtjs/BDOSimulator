@@ -103,10 +103,13 @@ public class EnchantNotice extends Fragment {
                     intent.setAction(Intent.ACTION_PICK);
                     intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, 10);
-                    pickup.setClickable(true);
                     break;
                 case 2:
                     bar.setVisibility(View.GONE);
+                    break;
+                case 3:
+                    pickup.setClickable(true);
+
                     break;
             }
 
@@ -268,7 +271,9 @@ public class EnchantNotice extends Fragment {
                         //내폰에있느 ㄴ이미지를 선택해야해해
                         //사진 목록을 보여주는 앱(갤러리,사진)의 화면을 불러야해
 
-                        handler.sendEmptyMessageDelayed(1, 2000);
+                        handler.sendEmptyMessageDelayed(1, 1000);
+                        handler.sendEmptyMessageDelayed(3, 3000);
+
 
 
                     }
@@ -340,9 +345,9 @@ public class EnchantNotice extends Fragment {
             Toast.makeText(getContext(), "잠시후 다시 시도해주세요", Toast.LENGTH_SHORT).show();
             swipe.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.shake));
             Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(300);
+            vibrator.vibrate(200);
             swipe.setRefreshing(false);
-            handler.sendEmptyMessageDelayed(2, 300);
+            handler.sendEmptyMessageDelayed(2, 200);
 
             return;
         }

@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/enchant_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/enchant_bg"
-    android:id="@+id/enchant_layout"
     tools:context="com.kkk8888.bdosimulator.EnchantActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="75dp"
-        android:layout_marginRight="30dp"
-        android:src="@android:drawable/ic_menu_camera"
-        app:backgroundTint="@color/colorAccent" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fab"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginBottom="75dp"-->
+    <!--android:layout_marginRight="30dp"-->
+    <!--android:src="@android:drawable/ic_menu_camera"-->
+    <!--app:backgroundTint="@color/colorAccent" />-->
+
 
     <android.support.v7.widget.CardView
         android:layout_width="350dp"
@@ -139,6 +141,57 @@
             android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/black"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:clickable="false"
+        android:layout_height="match_parent"
+        android:background="#79ffffff"></View>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="35dp"
+        fab:fab_addButtonColorNormal="@color/blue_semi_transparent"
+        fab:fab_addButtonColorPressed="@color/blue_semi_transparent_pressed"
+        fab:fab_addButtonPlusIconColor="@color/com_kakao_button_background_press"
+        fab:fab_labelStyle="@style/menu_labels_style">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/pink"
+            fab:fab_colorPressed="@color/pink_pressed"
+            fab:fab_icon="@android:drawable/ic_menu_camera"
+            fab:fab_title="현재화면 캡쳐" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@android:drawable/ic_menu_delete"
+            fab:fab_title="기어1 저장데이터 삭제" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@android:drawable/ic_menu_delete"
+            fab:fab_title="기어2 저장데이터 삭제" />
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
 </RelativeLayout>

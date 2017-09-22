@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.kkk8888.bdosimulator.EnchantSecond">
 
+    <!--<Button-->
+        <!--android:id="@+id/resetG"-->
+        <!--android:layout_width="75dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="185dp"-->
+        <!--android:background="@drawable/btn_gotov"-->
+        <!--android:text="초기화"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="17sp" />-->
     <!--여기서부터 선택된 뷰 이미지-->
 
     <LinearLayout
@@ -1113,8 +1124,8 @@
             android:layout_height="60dp"
             android:layout_above="@+id/linear"
             android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
             android:gravity="center"
+            android:textColor="#ffffff"
             android:textSize="12sp"
             android:textStyle="bold" />
     </RelativeLayout>

@@ -6,9 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,7 +78,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     OutlineTextView gear_neak_nowgrade, gear_wea_sec_nowgrade, gear_wea_awake_nowgrade, gear_wea_pri_nowgrade;
     OutlineTextView gear_ear1_nowgrade, gear_ear2_nowgrade, gear_shoes_nowgrade, gear_belt_nowgrade;
 
-    Button gotov; //돌파 버튼
+    Button gotov, resetG; //돌파 버튼
 
     ImageView needItem, enchantItem;
 
@@ -118,9 +120,29 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         loadSave();
 
 
+        //resetG = (Button) mainView.findViewById(R.id.resetG);
+//        resetG.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String dir = getActivity().getApplicationContext().getFilesDir().getPath();
+//                File save = new File(dir + "/" + classType + ".dat");
+//
+//                if (save.exists()) {
+//                    Toast.makeText(mainActivity, "기어1의 저장데이터를 삭제중입니다.. 잠시만 기다려주세요", Toast.LENGTH_SHORT).show();
+//                    save.delete();
+//                    handler.sendEmptyMessageDelayed(0, 2000);
+//                } else {
+//                    Toast.makeText(mainActivity, "초기화 할 데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+
         return mainView;
 
     }
+
+
 
     void settingView(View view) {
         searchView = (SearchView) view.findViewById(R.id.searchBtn);
@@ -330,7 +352,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         StringBuffer sb = null;
 
         if (!save.exists()) {
-            Toast.makeText(mainActivity, "저장된 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mainActivity, "기어1의 저장된 정보가 없습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -479,15 +501,15 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 } else if (item.getTableName().equals("무기")) {
 
-                    String sql2 = "select * from LongSword where `_id` = '" + searcheditem.get(position)._id + "'  and `Enchant` = '" + item.getNowGrade()+"'";
+                    String sql2 = "select * from LongSword where `_id` = '" + searcheditem.get(position)._id + "'  and `Enchant` = '" + item.getNowGrade() + "'";
                     //String sql2 = "select * from LongSword where `_id` = " +
-                           // searcheditem.get(position).get_id() + "";
+                    // searcheditem.get(position).get_id() + "";
 
                     if (db.isOpen()) {
 
                         Cursor cursor = db.rawQuery(sql2, null);
 
-                       // Log.i("빵구", searcheditem.get(position)._id + "," + cursor.getCount() + ", " + item.getNowGrade());
+                        // Log.i("빵구", searcheditem.get(position)._id + "," + cursor.getCount() + ", " + item.getNowGrade());
 
                         while (cursor.moveToNext()) {
 
@@ -1821,7 +1843,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         EnchantItem item = (EnchantItem) v.getTag();
 
-       // Log.i("키값", item.getSubType() + classType);
+        // Log.i("키값", item.getSubType() + classType);
 
         if (item == null) return;
 
@@ -2112,7 +2134,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                 } else itemType = "ORNAMENT";
             }
 
-            Log.i("씨발뭐지", itemType);
+            //Log.i("씨발뭐지", itemType);
 
 
             String sql = "";

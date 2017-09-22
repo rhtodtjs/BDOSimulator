@@ -8,6 +8,18 @@
 
     <!--여기서부터 선택된 뷰 이미지-->
 
+    <!--<Button-->
+        <!--android:id="@+id/resetG"-->
+        <!--android:layout_width="75dp"-->
+        <!--android:layout_height="55dp"-->
+        <!--android:background="@drawable/btn_gotov"-->
+        <!--android:text="초기화"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="17sp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="185dp" />-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -1118,6 +1130,7 @@
             android:textSize="12sp"
             android:textStyle="bold" />
     </RelativeLayout>
+
 
 
 </RelativeLayout>
