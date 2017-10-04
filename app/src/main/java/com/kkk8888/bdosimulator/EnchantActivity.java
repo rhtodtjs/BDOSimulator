@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -60,15 +61,18 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
     EnchantFirst enchantFirst;
 
     //FloatingActionButton fab;
-    FloatingActionButton actionA, actionB, actionC;
+    FloatingActionButton actionA, actionB, actionC, actionD;
 
     View rootView;
 
     private InterstitialAd mInterstitialAd;
     String classType;
 
+    OutlineTextView balks;
+
 
     View black;
+    ImageView balks_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +85,59 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         Intent intent = getIntent();
         classType = intent.getStringExtra("class");
+//
+//        black = findViewById(R.id.black);
+//        black.setClickable(false);
 
-        black = findViewById(R.id.black);
-        black.setClickable(false);
+
+        balks = (OutlineTextView) findViewById(R.id.balks);
+        balks_btn = (ImageView) findViewById(R.id.balks_btn);
 
 
+        balks_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Log.i("스택", Stack.balks + "");
+
+                if (Stack.balks >= 10.0) {
+                    Toast.makeText(EnchantActivity.this, "더 이상 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Stack.balks += 1.0;
+                if (enchantFirst.focusView != null && enchantSecond.focusView != null) {
+                    enchantFirst.previewRate(enchantFirst.focusView);
+                    enchantSecond.previewRate(enchantSecond.focusView);
+
+                }
+
+
+                stackChanged();
+            }
+        });
+
+        balks_btn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                if (Stack.balks >= 10.0) {
+                    Toast.makeText(EnchantActivity.this, "더 이상 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                Stack.balks = 10.0;
+                if (enchantFirst.focusView != null && enchantSecond.focusView != null) {
+                    enchantFirst.previewRate(enchantFirst.focusView);
+                    enchantSecond.previewRate(enchantSecond.focusView);
+
+                }
+
+                stackChanged();
+
+                return true;
+            }
+        });
 
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setSelectedTabIndicatorColor((Color.GRAY));
@@ -144,6 +196,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         Stack.stack_3 = 41;
         Stack.stack_4 = 71;
         Stack.stack_5 = 81;
+        Stack.balks = 0;
 
 
         reloadStack();
@@ -151,12 +204,12 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         getDBfile();
 
         final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
-        menuMultipleActions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(EnchantActivity.this, "뭘눌러보노.,.", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        menuMultipleActions.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(EnchantActivity.this, "뭘눌러보노.,.", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        black.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -170,16 +223,22 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 //        else black.setVisibility(View.GONE);
 
 
-
         actionA = (FloatingActionButton) findViewById(R.id.action_a);
         actionB = (FloatingActionButton) findViewById(R.id.action_b);
         actionC = (FloatingActionButton) findViewById(R.id.action_c);
+        actionD = (FloatingActionButton) findViewById(R.id.action_d);
+
+        // actionD.
 
 
         actionA.setOnClickListener(new View.OnClickListener() {
             //화면 캡처 버튼
             @Override
             public void onClick(View view) {
+
+                menuMultipleActions.collapse();
+
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                         requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
@@ -193,8 +252,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
                     }
                 }
-                menuMultipleActions.collapse();
-                black.setVisibility(View.GONE);
+                //black.setVisibility(View.GONE);
 
 
             }
@@ -217,7 +275,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                     Toast.makeText(EnchantActivity.this, "초기화 할 데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
                 menuMultipleActions.collapse();
-                black.setVisibility(View.GONE);
+                //black.setVisibility(View.GONE);
 
             }
         });
@@ -241,15 +299,22 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 menuMultipleActions.collapse();
-                black.setVisibility(View.GONE);
+                // black.setVisibility(View.GONE);
 
 
             }
         });
 
-//        menuMultipleActions.addButton(actionA);
-//        menuMultipleActions.addButton(actionB);
-//        menuMultipleActions.addButton(actionC);
+        actionD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Stack.balks = 10;
+                stackChanged();
+                menuMultipleActions.collapse();
+            }
+        });
+
 
     }
 
@@ -480,6 +545,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
 
+        balks.setText("" + (int) Stack.balks);
 
     }
 
@@ -514,6 +580,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
 
+        balks.setText("" + (int) Stack.balks);
 
     }
 
@@ -524,6 +591,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         stack_3.setText(Stack.stack_3 + "");
         stack_4.setText(Stack.stack_4 + "");
         stack_5.setText(Stack.stack_5 + "");
+        balks.setText("" + (int) Stack.balks);
     }
 
     long ltb;
@@ -534,7 +602,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
         if (System.currentTimeMillis() - ltb <= 1500) {
 
-            if (System.currentTimeMillis() % 3 == 0) {
+            if (System.currentTimeMillis() % 2 == 0) {
 
                 mInterstitialAd.show();
 

@@ -29,7 +29,7 @@ public class BoardAdapter extends RecyclerView.Adapter {
 
     ArrayList<BoardItem> board;
     Context mContext;
-    String aws = "http://ec2-52-78-134-69.ap-northeast-2.compute.amazonaws.com/";
+    String aws = "http://ec2-13-124-92-145.ap-northeast-2.compute.amazonaws.com/";
 
     public BoardAdapter(ArrayList<BoardItem> board, Context mContext) {
         this.board = board;

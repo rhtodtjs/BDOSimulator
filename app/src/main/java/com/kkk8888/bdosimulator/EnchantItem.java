@@ -7,12 +7,9 @@ package com.kkk8888.bdosimulator;
 public class EnchantItem {
 
     private String itemType = "";
-
-
     private String imgUrl = "";
     private String tableName = ""; // (방어구 , 악세 , 무기)
     private String subType = ""; //아이템 종류 (GREATSWORD , IRONGLOVE ..)
-
     private int grade = 0; // 아이템의 등급..녹템 초템 파템
     private int maxGrade = 0; //아이템의 최대 강화 단계..
     private int minDMG = 0; // 아이템의 방어력 증가량

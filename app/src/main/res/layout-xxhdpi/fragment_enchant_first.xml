@@ -9,16 +9,26 @@
     <!--여기서부터 선택된 뷰 이미지-->
 
     <!--<Button-->
-        <!--android:id="@+id/resetG"-->
-        <!--android:layout_width="75dp"-->
-        <!--android:layout_height="55dp"-->
-        <!--android:background="@drawable/btn_gotov"-->
-        <!--android:text="초기화"-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:textSize="17sp"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="185dp" />-->
+    <!--android:id="@+id/resetG"-->
+    <!--android:layout_width="75dp"-->
+    <!--android:layout_height="55dp"-->
+    <!--android:background="@drawable/btn_gotov"-->
+    <!--android:text="초기화"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textSize="17sp"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_marginTop="185dp" />-->
+
+    <TextView
+        android:id="@+id/nowrate"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/com_kakao_account_button_background"
+        android:textSize="11sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -1125,12 +1135,11 @@
             android:layout_height="60dp"
             android:layout_above="@+id/linear"
             android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
             android:gravity="center"
+            android:textColor="#ffffff"
             android:textSize="12sp"
             android:textStyle="bold" />
     </RelativeLayout>
-
 
 
 </RelativeLayout>

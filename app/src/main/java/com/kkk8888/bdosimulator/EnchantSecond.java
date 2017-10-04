@@ -88,7 +88,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
     EnchantItemRatio itemRate = new EnchantItemRatio();
     Random rnd = new Random();
 
-    TextView tv_ratio;
+    TextView tv_ratio, nowrate;
 
     EnchantItem focusView;
 
@@ -151,6 +151,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         gotov = (Button) view.findViewById(R.id.gotov);
         gotov.setOnClickListener(this);
 
+        nowrate = (TextView) view.findViewById(R.id.nowrate);
 //        resetG = (Button) view.findViewById(R.id.resetG);
 //        resetG.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -1483,6 +1484,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         double maxRatio;
         double currentRatio;
         String temprate;
+        double balks;
 
         switch (item.getGrade()) {
             case 0:
@@ -1496,16 +1498,16 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                temprate = nowRatio + "";
-                temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
                 break;
@@ -1521,16 +1523,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                temprate = nowRatio + "";
-                temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
                 break;
@@ -1546,15 +1547,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                temprate = nowRatio + "";
-                temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
                 break;
 
@@ -1570,14 +1571,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
-                temprate = nowRatio + "";
-                temprate = temprate.substring(0, 5);
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                if (nowRatio <= currentRatio) isUp = true;
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
 
@@ -1600,6 +1602,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         double baseRatio;
         double maxRatio;
         double currentRatio;
+        double balks;
 
         switch (item.getGrade()) {
             case 0:
@@ -1613,14 +1616,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
                 break;
@@ -1636,14 +1640,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
                 break;
@@ -1659,15 +1664,17 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
+
                 break;
 
             case 3:
@@ -1682,14 +1689,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
 
@@ -1711,6 +1719,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         double baseRatio;
         double maxRatio;
         double currentRatio;
+        double balks;
 
         switch (item.getGrade()) {
 
@@ -1725,14 +1734,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
                 break;
@@ -1748,14 +1758,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
                 break;
@@ -1771,14 +1782,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
                 break;
 
@@ -1794,14 +1806,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 if (nowStack >= maxStack) nowStack = maxStack;
 
+                balks = getBalks();
+
                 currentRatio = baseRatio + bonusRatio * nowStack;
 
+                tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
-                Log.i("확률", "Now! " + nowRatio + " Current " + currentRatio + " MaxRatio " + maxRatio);
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
 
-
-                if (nowRatio <= currentRatio) isUp = true;
+                if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
 
 
@@ -1901,14 +1914,19 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
         }
 
-
-        //Log.i("치트", item.getImgUrl() + " , " + item.getGrade() + " , " + item.getMaxGrade() + " , " + item.getTableName() + " , " + item.getSubType() + " , " + item.getItemId());
+        double balks = getBalks();
 
         currentRatio = baseRatio + bonusRatio * nowStack;
 
-        tv_ratio.setText("성공률 : " + currentRatio + " 최대 성공률 :" + maxRatio);
+        Log.i("씨발년", currentRatio + " , " + balks);
+        tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
 
+    }
+
+    public double getBalks() {
+
+        return Stack.balks / 2;
     }
 
 
@@ -1953,6 +1971,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         if (weaponPowerUp(temp)) {
                             temp.success();
+                            Stack.balks = 0;
+
                             Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(200);
                             if (temp.getNowGrade() > 7) mainActivity.seleceted = 0;
@@ -1976,6 +1996,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         if (bodyPowerUp(temp)) {
                             temp.success();
+                            Stack.balks = 0;
+
                             Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(200);
                             if (temp.getNowGrade() > 5) mainActivity.seleceted = 0;
@@ -1998,6 +2020,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         if (accePowerUp(temp)) {
                             temp.success();
+                            Stack.balks = 0;
+
                             Vibrator vibrator = (Vibrator) mainActivity.getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(200);
                             mainActivity.seleceted = 0;

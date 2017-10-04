@@ -66,8 +66,8 @@ public class EnchantNotice extends Fragment {
     Button loadBtn, writeBtn;
 
 
-    String loadBoardUrl = "http://ec2-52-78-134-69.ap-northeast-2.compute.amazonaws.com/loadBoard.php";
-    String insertBoardUrl = "http://ec2-52-78-134-69.ap-northeast-2.compute.amazonaws.com/imgUpload.php";
+    String loadBoardUrl = "http://ec2-13-124-92-145.ap-northeast-2.compute.amazonaws.com/loadBoard.php";
+    String insertBoardUrl = "http://ec2-13-124-92-145.ap-northeast-2.compute.amazonaws.com/imgUpload.php";
     ArrayList<BoardItem> board = new ArrayList<>();
     RecyclerView boardList;
     BoardAdapter adapter;
@@ -118,12 +118,12 @@ public class EnchantNotice extends Fragment {
     };
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_enchant_notice, container, false);
+
 
         profile = UserProfile.loadFromCache();
         userID = profile.getId();
@@ -275,7 +275,6 @@ public class EnchantNotice extends Fragment {
                         handler.sendEmptyMessageDelayed(3, 3000);
 
 
-
                     }
                 });
 
@@ -399,7 +398,8 @@ public class EnchantNotice extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(EnchantNotice.this, "에러", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(EnchantNotice.this, "아무것도..", Toast.LENGTH_SHORT).show();
             }
         });
 
