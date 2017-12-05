@@ -1,5 +1,6 @@
 package com.kkk8888.bdosimulator;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -204,24 +205,6 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
         getDBfile();
 
         final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
-//        menuMultipleActions.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(EnchantActivity.this, "뭘눌러보노.,.", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-//        black.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                menuMultipleActions.collapse();
-//                black.setVisibility(View.GONE);
-//            }
-//        });
-//
-//        if(menuMultipleActions.isExpanded()) black.setVisibility(View.VISIBLE);
-//        else black.setVisibility(View.GONE);
-
 
         actionA = (FloatingActionButton) findViewById(R.id.action_a);
         actionB = (FloatingActionButton) findViewById(R.id.action_b);
@@ -318,6 +301,7 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
 
         FragmentTransaction ft;

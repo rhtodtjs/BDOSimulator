@@ -92,6 +92,21 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
     EnchantItem focusView;
 
+    int[] viewList = {
+            R.id.gear_belt, R.id.gear_body, R.id.gear_ear1, R.id.gear_ear2, R.id.gear_ring1,
+            R.id.gear_ring2, R.id.gear_helmet, R.id.gear_wea_awake, R.id.gear_shoe,
+            R.id.gear_wea_pri, R.id.gear_wea_second, R.id.gear_neck, R.id.gear_glove};
+
+    int[] viewSelectList = {
+            R.id.gear_belt_selected, R.id.gear_body_selected, R.id.gear_ear1_selected, R.id.gear_ear2_selected, R.id.gear_ring1_selected,
+            R.id.gear_ring2_selected, R.id.gear_helmet_selected, R.id.gear_wea_awake_selected, R.id.gear_shoe_selected,
+            R.id.gear_wea_pri_selected, R.id.gear_wea_second_selected, R.id.gear_neck_selected, R.id.gear_glove_selected};
+
+    int[] viewNowList = {
+            R.id.gear_belt_nowgrade, R.id.gear_body_nowgrade, R.id.gear_ear1_nowgrade, R.id.gear_ear2_nowgrade, R.id.gear_ring1_nowgrade,
+            R.id.gear_ring2_nowgrade, R.id.gear_helmet_nowgrade, R.id.gear_wea_awake_nowgrade, R.id.gear_shoe_nowgrade,
+            R.id.gear_wea_pri_nowgrade, R.id.gear_wea_second_nowgrade, R.id.gear_neck_nowgrade, R.id.gear_glove_nowgrade};
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -210,73 +225,13 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         gear_belt_nowgrade = (OutlineTextView) view.findViewById(R.id.gear_belt_nowgrade);
 
         ImageView tempView = null;
-        for (int i = 0; i < 13; i++) {
-            tempView = (ImageView) view.findViewById(R.id.gear_ear1 + i);
+        for (int i = 0; i < viewList.length; i++) {
+            tempView = (ImageView) view.findViewById(viewList[i]);
             tempView.setOnClickListener(this);
             tempView.setOnLongClickListener(this);
         }
 
         callGearItem(view);
-//        gear_helmet = (ImageView) view.findViewById(R.id.gear_helmet);
-//        gear_helmet.setTag(new EnchantItem("HELMET", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/13_hel/00011013.png", 3, 20, 0, 0, 19, "방어구", "HELMET", R.id.gear_helmet_selected, R.id.gear_helmet_grade, 11013));
-//        gear_body = (ImageView) view.findViewById(R.id.gear_body);
-//        gear_body.setTag(new EnchantItem("BODY", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/09_upperbody/00011017.png", 3, 20, 0, 0, 19, "방어구", "BODY", R.id.gear_body_selected, R.id.gear_body_grade, 11017));
-//        gear_ring1 = (ImageView) view.findViewById(R.id.gear_ring1);
-//        gear_ring1.setTag(new EnchantItem("RING", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/16_ring/00012031.png", 3, 5, 0, 0, 3, "악세", "RING", R.id.gear_ring1_selected, R.id.gear_ring1_grade, 12031));
-//        gear_ring2 = (ImageView) view.findViewById(R.id.gear_ring2);
-//        gear_ring2.setTag(new EnchantItem("RING", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/16_ring/00012031.png", 3, 5, 0, 0, 3, "악세", "RING", R.id.gear_ring2_selected, R.id.gear_ring2_grade, 12031));
-//        gear_glove = (ImageView) view.findViewById(R.id.gear_glove);
-//        gear_glove.setTag(new EnchantItem("GLOVES", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/11_hand/00011015.png", 3, 20, 0, 0, 19, "방어구", "GLOVES", R.id.gear_glove_selected, R.id.gear_glove_grade, 11015));
-//        gear_neak = (ImageView) view.findViewById(R.id.gear_neck);
-//        gear_neak.setTag(new EnchantItem("NECKLACE", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/15_necklace/00011607.png", 3, 5, 0, 0, 3, "악세", "NECKLACE", R.id.gear_neck_selected, R.id.gear_neck_grade, 11607));
-//        gear_wea_sec = (ImageView) view.findViewById(R.id.gear_wea_second);
-//        gear_wea_sec.setTag(new EnchantItem("W_SECOND", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010138.png", 3, 20, 0, 0, 19, "무기", "SHIELD", R.id.gear_wea_second_selected, R.id.gear_wea_second_grade, 10138));
-//        gear_wea_awake = (ImageView) view.findViewById(R.id.gear_wea_awake);
-//        gear_wea_awake.setTag(new EnchantItem("W_AWAKE", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014702.png", 3, 20, 0, 0, 19, "무기", "GREATSWORD", R.id.gear_wea_awake_selected, R.id.gear_wea_awake_grade, 14702));
-//        gear_wea_pri = (ImageView) view.findViewById(R.id.gear_wea_pri);
-//        gear_wea_pri.setTag(new EnchantItem("W_PRI", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010010.png", 3, 20, 0, 0, 19, "무기", "SWORD", R.id.gear_wea_pri_selected, R.id.gear_wea_pri_grade, 10010));
-//        gear_ear1 = (ImageView) view.findViewById(R.id.gear_ear1);
-//        gear_ear1.setTag(new EnchantItem("EARRING", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/17_earring/00011828.png", 3, 5, 0, 0, 3, "악세", "null", R.id.gear_ear1_selected, R.id.gear_ear1_grade, 11828));
-//        gear_ear2 = (ImageView) view.findViewById(R.id.gear_ear2);
-//        gear_ear2.setTag(new EnchantItem("EARRING", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/17_earring/00011828.png", 3, 5, 0, 0, 3, "악세", "null", R.id.gear_ear2_selected, R.id.gear_ear2_grade, 11828));
-//        gear_shoes = (ImageView) view.findViewById(R.id.gear_shoe);
-//        gear_shoes.setTag(new EnchantItem("SHOES", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/12_foot/00011016.png", 3, 20, 0, 0, 19, "방어구", "SHOES", R.id.gear_shoe_selected, R.id.gear_shoe_grade, 11016));
-//        gear_belt = (ImageView) view.findViewById(R.id.gear_belt);
-//        gear_belt.setTag(new EnchantItem("BELT", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/18_belt/00012230.png", 3, 5, 0, 0, 3, "악세", "BELT", R.id.gear_belt_selected, R.id.gear_belt_grade, 12230));
-//
-//
-//        ImageView tempView = null;
-//        EnchantItem tempItem = null;
-//
-//        for (int i = 0; i < 13; i++) {
-//            tempView = (ImageView) view.findViewById(R.id.gear_ear1 + i);
-//            tempView.setOnClickListener(this);
-//            tempView.setOnLongClickListener(this);
-//            tempItem = (EnchantItem) (tempView.getTag());
-//            reloadData(tempItem);
-//            Picasso.with(getContext()).load(tempItem.getImgUrl()).resize(125, 125).into(tempView);
-//
-//            ImageView iv = (ImageView) mainView.findViewById(tempItem.getGradeID());
-//            switch (tempItem.getGrade()) {
-//                case 0:
-//                    iv.setImageResource(R.drawable.item_grade_0);
-//                    break;
-//                case 1:
-//                    iv.setImageResource(R.drawable.item_grade_1);
-//                    break;
-//                case 2:
-//                    iv.setImageResource(R.drawable.item_grade_2);
-//                    break;
-//                case 3:
-//                    iv.setImageResource(R.drawable.item_grade_3);
-//                    break;
-//
-//            }
-//            iv = null;
-//        }
-//
-//        setGrade();
-
         mainActivity = (EnchantActivity) getActivity();
 
 
@@ -284,6 +239,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
 
     void callGearItem(View view) {
+
+
         gear_helmet = (ImageView) view.findViewById(R.id.gear_helmet);
         gear_helmet.setTag(new EnchantItem("HELMET", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/13_hel/00011013.png", 3, 20, 0, 0, 19, "방어구", "HELMET", R.id.gear_helmet_selected, R.id.gear_helmet_grade, 11013));
         gear_body = (ImageView) view.findViewById(R.id.gear_body);
@@ -296,12 +253,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         gear_glove.setTag(new EnchantItem("GLOVES", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/11_hand/00011015.png", 3, 20, 0, 0, 19, "방어구", "GLOVES", R.id.gear_glove_selected, R.id.gear_glove_grade, 11015));
         gear_neak = (ImageView) view.findViewById(R.id.gear_neck);
         gear_neak.setTag(new EnchantItem("NECKLACE", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/15_necklace/00011607.png", 3, 5, 0, 0, 3, "악세", "NECKLACE", R.id.gear_neck_selected, R.id.gear_neck_grade, 11607));
-        gear_wea_sec = (ImageView) view.findViewById(R.id.gear_wea_second);
-        gear_wea_sec.setTag(new EnchantItem("W_SECOND", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010138.png", 3, 20, 0, 0, 19, "무기", "SHIELD", R.id.gear_wea_second_selected, R.id.gear_wea_second_grade, 10138));
-        gear_wea_awake = (ImageView) view.findViewById(R.id.gear_wea_awake);
-        gear_wea_awake.setTag(new EnchantItem("W_AWAKE", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014702.png", 3, 20, 0, 0, 19, "무기", "GREATSWORD", R.id.gear_wea_awake_selected, R.id.gear_wea_awake_grade, 14702));
-        gear_wea_pri = (ImageView) view.findViewById(R.id.gear_wea_pri);
-        gear_wea_pri.setTag(new EnchantItem("W_PRI", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010010.png", 3, 20, 0, 0, 19, "무기", "SWORD", R.id.gear_wea_pri_selected, R.id.gear_wea_pri_grade, 10010));
         gear_ear1 = (ImageView) view.findViewById(R.id.gear_ear1);
         gear_ear1.setTag(new EnchantItem("EARRING", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/17_earring/00011828.png", 3, 5, 0, 0, 3, "악세", "null", R.id.gear_ear1_selected, R.id.gear_ear1_grade, 11828));
         gear_ear2 = (ImageView) view.findViewById(R.id.gear_ear2);
@@ -311,12 +262,171 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         gear_belt = (ImageView) view.findViewById(R.id.gear_belt);
         gear_belt.setTag(new EnchantItem("BELT", "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/18_belt/00012230.png", 3, 5, 0, 0, 3, "악세", "BELT", R.id.gear_belt_selected, R.id.gear_belt_grade, 12230));
 
+        String init_imgurl_sec = null, init_imgurl_awk = null, init_imgurl_pri = null;
+        String init_subtype_sec = null, init_subtype_awk = null, init_subtype_pri = null;
+        int init_itemid_sec = 0, init_itemid_awk = 0, init_itemid_pri = 0;
+
+        switch (classType) {
+            case "war":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010138.png";
+                init_subtype_sec = "SHIELD";
+                init_itemid_sec = 10138;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014702.png";
+                init_subtype_awk = "GREATSWORD";
+                init_itemid_awk = 14702;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010010.png";
+                init_subtype_pri = "SWORD";
+                init_itemid_pri = 10010;
+                break;
+            case "sorc":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010538.png";
+                init_subtype_sec = "AMULET";
+                init_itemid_sec = 10538;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014712.png";
+                init_subtype_awk = "SCYTHE";
+                init_itemid_awk = 14712;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010410.png";
+                init_subtype_pri = "TALISMAN";
+                init_itemid_pri = 10410;
+                break;
+            case "giant":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010738.png";
+                init_subtype_sec = "ORNAMENT";
+                init_itemid_sec = 10738;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014722.png";
+                init_subtype_awk = "IRONGLOVES";
+                init_itemid_awk = 14722;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010610.png";
+                init_subtype_pri = "AXE";
+                init_itemid_pri = 10610;
+                break;
+            case "ranger":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010338.png";
+                init_subtype_sec = "DAGGER";
+                init_itemid_sec = 10338;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014732.png";
+                init_subtype_awk = "ELEMENTALSWORD";
+                init_itemid_awk = 14732;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010210.png";
+                init_subtype_pri = "BOW";
+                init_itemid_pri = 10210;
+                break;
+            case "tamer":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00013038.png";
+                init_subtype_sec = "TOY";
+                init_itemid_sec = 13038;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014742.png";
+                init_subtype_awk = "SKYBLUNT";
+                init_itemid_awk = 14742;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00013210.png";
+                init_subtype_pri = "SHORTSWORD";
+                init_itemid_pri = 13210;
+                break;
+            case "kuno":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00014538.png";
+                init_subtype_sec = "KUNAISHURIKEN";
+                init_itemid_sec = 14538;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014792.png";
+                init_subtype_awk = "CHAKRAM";
+                init_itemid_awk = 14792;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00013210.png";
+                init_subtype_pri = "SHORTSWORD";
+                init_itemid_pri = 13210;
+                break;
+            case "valki":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010138.png";
+                init_subtype_sec = "SHIELD";
+                init_itemid_sec = 10138;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014752.png";
+                init_subtype_awk = "LANCIA";
+                init_itemid_awk = 14752;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00010010.png";
+                init_subtype_pri = "SWORD";
+                init_itemid_pri = 10010;
+                break;
+            case "ninza":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00014638.png";
+                init_subtype_sec = "KUNAISHURIKEN";
+                init_itemid_sec = 14638;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014782.png";
+                init_subtype_awk = "SURADO";
+                init_itemid_awk = 14782;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00013210.png";
+                init_subtype_pri = "SHORTSWORD";
+                init_itemid_pri = 13210;
+                break;
+            case "fblader":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00013138.png";
+                init_subtype_sec = "SHORTBOW";
+                init_itemid_sec = 13138;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014772.png";
+                init_subtype_awk = "WOLCHANG";
+                init_itemid_awk = 14722;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00013310.png";
+                init_subtype_pri = "BLADE";
+                init_itemid_pri = 13310;
+                break;
+            case "witch":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010338.png";
+                init_subtype_sec = "DAGGER";
+                init_itemid_sec = 10338;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014802.png";
+                init_subtype_awk = "SPHERE";
+                init_itemid_awk = 14802;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014410.png";
+                init_subtype_pri = "STAFF";
+                init_itemid_pri = 14410;
+                break;
+            case "wizard":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010338.png";
+                init_subtype_sec = "DAGGER";
+                init_itemid_sec = 10338;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014812.png";
+                init_subtype_awk = "SPHERE2";
+                init_itemid_awk = 14812;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014410.png";
+                init_subtype_pri = "STAFF";
+                init_itemid_pri = 14410;
+                break;
+            case "blader":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00013138.png";
+                init_subtype_sec = "SHORTBOW";
+                init_itemid_sec = 13138;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014762.png";
+                init_subtype_awk = "MUSINDO";
+                init_itemid_awk = 14762;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00013310.png";
+                init_subtype_pri = "BLADE";
+                init_itemid_pri = 13310;
+                break;
+            case "darkelf":
+                init_imgurl_sec = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/08_subweapon/00010738.png";
+                init_subtype_sec = "ORNAMENT";
+                init_itemid_sec = 10738;
+                init_imgurl_awk = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00014817.png";
+                init_subtype_awk = "VEDIANT";
+                init_itemid_awk = 14817;
+                init_imgurl_pri = "http://bddatabase.net/items/new_icon/06_pc_equipitem/00_common/01_weapon/00011360.png";
+                init_subtype_pri = "ELFSWORD";
+                init_itemid_pri = 11360;
+                break;
+            default:
+                break;
+        }
+
+        gear_wea_sec = (ImageView) view.findViewById(R.id.gear_wea_second);
+        gear_wea_sec.setTag(new EnchantItem("W_SECOND", init_imgurl_sec, 3, 20, 0, 0, 19, "무기", init_subtype_sec, R.id.gear_wea_second_selected, R.id.gear_wea_second_grade, init_itemid_sec));
+        gear_wea_awake = (ImageView) view.findViewById(R.id.gear_wea_awake);
+        gear_wea_awake.setTag(new EnchantItem("W_AWAKE", init_imgurl_awk, 3, 20, 0, 0, 19, "무기", init_subtype_awk, R.id.gear_wea_awake_selected, R.id.gear_wea_awake_grade, init_itemid_awk));
+        gear_wea_pri = (ImageView) view.findViewById(R.id.gear_wea_pri);
+        gear_wea_pri.setTag(new EnchantItem("W_PRI", init_imgurl_pri, 3, 20, 0, 0, 19, "무기", init_subtype_pri, R.id.gear_wea_pri_selected, R.id.gear_wea_pri_grade, init_itemid_pri));
+
 
         ImageView tempView = null;
         EnchantItem tempItem = null;
 
-        for (int i = 0; i < 13; i++) {
-            tempView = (ImageView) view.findViewById(R.id.gear_ear1 + i);
+        for (int i = 0; i < viewList.length; i++) {
+            tempView = (ImageView) view.findViewById(viewList[i]);
             tempItem = (EnchantItem) (tempView.getTag());
             reloadData(tempItem);
             Picasso.with(getContext()).load(tempItem.getImgUrl()).resize(125, 125).into(tempView);
@@ -354,8 +464,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
 
         ImageView img = null;
-        for (int i = 0; i < 13; i++) {
-            img = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+        for (int i = 0; i < viewList.length; i++) {
+            img = (ImageView) mainView.findViewById(viewList[i]);
             item = (EnchantItem) img.getTag();
 
             ap += item.getMaxDMG();
@@ -387,10 +497,10 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
         ImageView iv;
         EnchantItem item;
-        for (int i = 0; i < 13; i++) {
-            iv = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+        for (int i = 0; i < viewList.length; i++) {
+            iv = (ImageView) mainView.findViewById(viewList[i]);
             item = (EnchantItem) iv.getTag();
-            OutlineTextView textView = (OutlineTextView) mainView.findViewById(R.id.gear_ear1_nowgrade + i);
+            OutlineTextView textView = (OutlineTextView) mainView.findViewById(viewNowList[i]);
             if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() == 0) continue;
             if ((!(item.getTableName().equals("악세"))) && item.getNowGrade() <= 15 && item.getNowGrade() > 0)
                 textView.setText("+" + item.getNowGrade());
@@ -454,7 +564,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
             for (int i = 0; i < obj.length(); i++) {
                 JSONObject sibal = obj.getJSONObject(i);
-                ImageView temp = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+                ImageView temp = (ImageView) mainView.findViewById(viewList[i]);
                 EnchantItem temp2 = gson.fromJson(sibal.toString(), EnchantItem.class);
                 temp.setTag(temp2);
             }
@@ -472,8 +582,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         ImageView tempView = null;
         EnchantItem tempItem = null;
 
-        for (int i = 0; i < 13; i++) {
-            tempView = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+        for (int i = 0; i < viewList.length; i++) {
+            tempView = (ImageView) mainView.findViewById(viewList[i]);
             tempItem = (EnchantItem) (tempView.getTag());
             reloadData(tempItem);
             if (tempItem.getImgUrl().equals("null")) continue;
@@ -1505,7 +1615,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1529,7 +1639,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1553,7 +1663,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1577,7 +1687,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1622,7 +1732,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1646,7 +1756,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1670,7 +1780,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1695,7 +1805,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1740,7 +1850,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1764,7 +1874,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1788,7 +1898,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -1812,7 +1922,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                 tv_ratio.setText("성공률 : " + (currentRatio + balks) + " 최대 성공률 :" + (maxRatio + balks));
 
-                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio+balks));
+                nowrate.setText("현재수치 : " + Math.floor(nowRatio) + " 목표수치 : " + Math.floor(currentRatio + balks));
 
                 if (nowRatio <= currentRatio + balks) isUp = true;
                 else isUp = false;
@@ -2063,8 +2173,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
             OutputStreamWriter osw = new OutputStreamWriter(fos);
 
             osw.append('[');
-            for (int i = 0; i < 13; i++) {
-                ImageView temp = (ImageView) mainView.findViewById(R.id.gear_ear1 + i);
+            for (int i = 0; i < viewList.length; i++) {
+                ImageView temp = (ImageView) mainView.findViewById(viewList[i]);
                 osw.append(gson.toJson(temp.getTag()));
                 if (i < 12) {
                     osw.append(',');
@@ -2084,8 +2194,8 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
 
         ImageView imageView;
-        for (int i = 0; i < 13; i++) {
-            imageView = (ImageView) mainView.findViewById(R.id.gear_ear1_selected + i);
+        for (int i = 0; i < viewSelectList.length; i++) {
+            imageView = (ImageView) mainView.findViewById(viewSelectList[i]);
             imageView.setVisibility(View.INVISIBLE);
         }
 
