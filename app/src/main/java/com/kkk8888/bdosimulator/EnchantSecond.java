@@ -1,5 +1,6 @@
 package com.kkk8888.bdosimulator;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -11,12 +12,15 @@ import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -120,25 +124,19 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         mainView = inflater.inflate(R.layout.fragment_enchant_second, container, false);
-
-
         db = SQLiteDatabase.openOrCreateDatabase("data/data/com.kkk8888.bdosimulator/databases/itemlist.db", null);
-
         settingView(mainView);
-
         loadSave();
-
-
         return mainView;
 
     }
 
-    void settingView(View view) {
+    public void settingView(View view) {
         searchView = (SearchView) view.findViewById(R.id.searchBtn);
         mainLayout = (RelativeLayout) view.findViewById(R.id.enchant_frag2);
         mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -167,14 +165,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         gotov.setOnClickListener(this);
 
         nowrate = (TextView) view.findViewById(R.id.nowrate);
-//        resetG = (Button) view.findViewById(R.id.resetG);
-//        resetG.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                callGearItem(mainView);
-//            }
-//        });
 
         needItem = (ImageView) view.findViewById(R.id.needItem);
         enchantItem = (ImageView) view.findViewById(R.id.enchantItem);
@@ -453,7 +443,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         setGrade();
     }
 
-
     int[] initAllStat() {
 
         int[] ints = new int[3];
@@ -538,10 +527,12 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         File save = new File(dir + "/" + classType + "2.dat");
         StringBuffer sb = null;
 
+
         if (!save.exists()) {
             Toast.makeText(mainActivity, "기어2 의 저장 정보가 없습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         try {
 
@@ -613,9 +604,44 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
     }
 
+
+    public void saveData() {
+        Gson gson = new Gson();
+
+        String dir = getActivity().getApplicationContext().getFilesDir().getPath();
+        File save = new File(dir + "/" + classType + "2.dat");
+        try {
+            save.createNewFile();
+            FileOutputStream fos = new FileOutputStream(save);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+
+            osw.append('[');
+            for (int i = 0; i < viewList.length; i++) {
+                ImageView temp = (ImageView) mainView.findViewById(viewList[i]);
+                osw.append(gson.toJson(temp.getTag()));
+                if (i < 12) {
+                    osw.append(',');
+                }
+
+
+            }
+            osw.append(']');
+
+            osw.flush();
+            osw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(mainActivity, "자료 저장에 실패하였습니다. 오류코드 : " + e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public boolean onLongClick(final View v) {
 
+        final EnchantItem enchantItem = (EnchantItem) v.getTag();
+
+        // if (enchantItem.getImgUrl().equals("null")) {
         itemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -689,14 +715,10 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                 } else if (item.getTableName().equals("무기")) {
 
                     String sql2 = "select * from LongSword where `_id` = '" + searcheditem.get(position)._id + "'  and `Enchant` = '" + item.getNowGrade() + "'";
-                    //String sql2 = "select * from LongSword where `_id` = " +
-                    // searcheditem.get(position).get_id() + "";
 
                     if (db.isOpen()) {
 
                         Cursor cursor = db.rawQuery(sql2, null);
-
-                        // Log.i("빵구", searcheditem.get(position)._id + "," + cursor.getCount() + ", " + item.getNowGrade());
 
                         while (cursor.moveToNext()) {
 
@@ -1063,18 +1085,13 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                             item.setNeedItemID(cursor.getInt(cursor.getColumnIndex("NeedEnchantItemID")));
 
                         }//
-
                     }
-
-
                 } else if (item.getTableName().equals("악세")) {
 
                     String sql2 = "select * from TwoHandedSword where `_id` = '" + searcheditem.get(position)._id + "' and `Enchant` = '" + item.getNowGrade() + "'";
-                    ;
                     if (db.isOpen()) {
 
                         Cursor cursor = db.rawQuery(sql2, null);
-
 
                         while (cursor.moveToNext()) {
 
@@ -1085,13 +1102,9 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                             item.setNeedItemID(cursor.getInt(cursor.getColumnIndex("NeedEnchantItemID")));
 
                         }
-
-
                     }
-
                 }
                 int[] stat = new int[3];
-
 
                 stat = initAllStat();
                 setGrade();
@@ -1100,12 +1113,9 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                 dp.setText("방어력\n" + stat[1]);
                 wap.setText("각성 공격력\n" + stat[2]);
 
-
             }
 
-
         });
-
 
         searchView.requestFocus();
 
@@ -1114,9 +1124,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         text.setBackgroundColor(Color.WHITE);
 
         searchView.setVisibility(View.VISIBLE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-
-        {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 EnchantItem item = (EnchantItem) v.getTag();
@@ -1148,44 +1156,86 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
             }
         });
 
+        // } else {
+//            final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            builder.setTitle("Item Info Panel");
+//            View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_detail, null);
+//            builder.setView(dialogView);
+//            final AlertDialog dialog = builder.create();
+//            //FindView
+//            Button ok = (Button) dialogView.findViewById(R.id.detail_ok);
+//            Button delete = (Button) dialogView.findViewById(R.id.detail_delete);
+//            TextView panel = (TextView) dialogView.findViewById(R.id.detail_panel);
+//            final EditText grade = (EditText) dialogView.findViewById(R.id.detail_grade);
+//            grade.setText(enchantItem.getNowGrade() + "");
+//            //e o FindView
+//            panel.setText("현재 강화 등급 (MAX" + enchantItem.getMaxGrade() + ") :");
+//            grade.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//                    if (charSequence.toString().equals("")) return;
+//                    if (Integer.parseInt(charSequence.toString()) > enchantItem.getMaxGrade()) {
+//                        Toast.makeText(getContext(), "최대 등급을 넘을 수 없습니다.", Toast.LENGTH_SHORT).show();
+//                        grade.setText(enchantItem.getMaxGrade() + "");
+//                        return;
+//                    }
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable editable) {
+//
+//                }
+//            });
+//            ok.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    enchantItem.setNowGrade(Integer.parseInt(grade.getText().toString()));
+//                    reloadData(enchantItem);
+//                    saveData();
+//                    dialog.dismiss();
+//
+//                }
+//            });
+//
+//            delete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    enchantItem.setDie(1);
+//                    reloadData(enchantItem);
+//                    saveData();
+//                    dialog.dismiss();
+//
+//
+//                }
+//            });
+//
+//            dialog.show();
+
+        //}
 
         return true;
     }
 
+
     public void reloadData(EnchantItem item) {
-
-
         if (item.getTableName().equals("방어구")) {
-
             String sql2 = "select * from Blunt where `_id` = '" + item.getItemId() + "' and `Enchant` = '" + item.getNowGrade() + "'";
             if (db.isOpen()) {
-
                 Cursor cursor = db.rawQuery(sql2, null);
-
-
                 while (cursor.moveToNext()) {
-
-
                     item.setMinDMG(cursor.getInt(cursor.getColumnIndex("MDV")) + cursor.getInt(cursor.getColumnIndex("MPV")));
-
-
                 }
-
             }
-
         } else if (item.getTableName().equals("무기")) {
-
             String sql2 = "select * from LongSword where `_id` = '" + item.getItemId() + "' and `Enchant` = '" + item.getNowGrade() + "'";
             if (db.isOpen()) {
-
                 Cursor cursor = db.rawQuery(sql2, null);
-
-                Log.i("이거다", item.getSubType());
-
                 while (cursor.moveToNext()) {
-
                     //워리어시작.. 힘들다
-
                     if (item.getSubType().equals("SWORD")) {
                         String sibal = cursor.getString(cursor.getColumnIndex("DDD"));
                         String[] sibal2 = sibal.split("\\+");
@@ -1229,8 +1279,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                         item.setMaxDMG(Integer.parseInt(sibal) + item.getBaseAp());
                         item.setMinDMG(cursor.getInt(cursor.getColumnIndex("DDV")) + cursor.getInt(cursor.getColumnIndex("DPV")));
                         //워리어 끝
-
-
                         //소서러 시작
 
                     } else if (item.getSubType().equals("TALISMAN")) {
@@ -1276,6 +1324,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
 
                         //소서 끝
                         //레인저 시작
+
                     } else if (item.getSubType().equals("BOW")) {
                         String sibal = cursor.getString(cursor.getColumnIndex("RDD"));
                         String[] sibal2 = sibal.split("\\+");
@@ -1412,7 +1461,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                         String[] sibal2 = sibal.split("\\+");
                         item.setBaseAp(5);
                         item.setMaxDMG(Integer.parseInt(sibal2[1]) + item.getBaseAp());
-
 
                         //발키리끝
                         //무사 시작
@@ -1581,7 +1629,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         wap.setText("각성 공격력\n" + stat[2]);
     }
 
-
     public boolean weaponPowerUp(EnchantItem item) {
 
         boolean isUp = false;
@@ -1699,7 +1746,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         return isUp;
 
     }
-
 
     public boolean bodyPowerUp(EnchantItem item) {
 
@@ -2039,7 +2085,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         return Stack.balks / 2;
     }
 
-
     public void onClick(final View v) {
 
         searchView.setVisibility(View.INVISIBLE);
@@ -2162,35 +2207,7 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
         }
 
 
-        Gson gson = new Gson();
-
-        String dir = getActivity().getApplicationContext().getFilesDir().getPath();
-        File save = new File(dir + "/" + classType + "2.dat");
-        Log.i("저작경로", save.getAbsolutePath());
-        try {
-            save.createNewFile();
-            FileOutputStream fos = new FileOutputStream(save);
-            OutputStreamWriter osw = new OutputStreamWriter(fos);
-
-            osw.append('[');
-            for (int i = 0; i < viewList.length; i++) {
-                ImageView temp = (ImageView) mainView.findViewById(viewList[i]);
-                osw.append(gson.toJson(temp.getTag()));
-                if (i < 12) {
-                    osw.append(',');
-                }
-
-
-            }
-            osw.append(']');
-
-            osw.flush();
-            osw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(mainActivity, "자료 저장에 실패하였습니다. 오류코드 : " + e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        saveData();
 
 
         ImageView imageView;
@@ -2240,7 +2257,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
     }
 
     class GetDataFromDB extends AsyncTask<String, String, ImageView> {
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -2347,18 +2363,15 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
                 } else itemType = "ORNAMENT";
             }
 
-            Log.i("씨발뭐지", itemType);
-
-
-            String sql = "";
+            String sql;
             if (Type.equals("W_PRI") || Type.equals("W_AWAKE") || Type.equals("W_SECOND")) {
                 //검색하려는 아이템 종류가 무기류 인경우..
-                sql = "select * from db_items_base where `TYPE` = 'WEAPON' and `SUBTYPE` = '" + itemType + "' and `NAME_KR` LIKE '%" + search +
-                        "%'";
+                sql = "select *  from db_items_base where `TYPE` = 'WEAPON' and `SUBTYPE` = '" + itemType + "' and NAME_KR  LIKE '%" + search + "%'";
             } else {
                 //검색하려는 아이템 종류가 무기가 아닌경우..
-                sql = "select * from db_items_base where `SUBTYPE` = '" + Type + "' and `NAME_KR` LIKE '%" + search +
-                        "%'";
+                sql = "select * from db_items_base where `SUBTYPE` = '" + Type + "' and NAME_KR  LIK" +
+                        "" +
+                        "E '%" + search + "%'";
             }
             buffer = new StringBuffer();
             int _id = 0;
@@ -2366,11 +2379,16 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
             if (db.isOpen()) {
 
                 Cursor cursor = db.rawQuery(sql, null);
+//                String jar = "select * from db_items_base where "
 
                 while (cursor.moveToNext()) {
                     buffer.append(cursor.getString(cursor.getColumnIndex("NAME_KR")));
-                    buffer.append("\n");
 
+                    for (String key : cursor.getColumnNames()) {
+                        Log.d("리트", key);
+                    }
+                   // Log.d("리스트", cursor.getString(cursor.getColumnNames());
+                    buffer.append("\n");
                 }
             }
 
@@ -2381,8 +2399,6 @@ public class EnchantSecond extends Fragment implements View.OnClickListener, Vie
             for (int i = 0; i < tlqkf.length; i++) {
                 if (tlqkf[i].contains(search)) {
                     searcheditem.add(new SearchItem(tlqkf[i], 0));
-
-
                 }
             }
 

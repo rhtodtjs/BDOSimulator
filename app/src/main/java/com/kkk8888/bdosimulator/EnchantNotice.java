@@ -140,7 +140,6 @@ public class EnchantNotice extends Fragment {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // board.clear();
                 loadBoard();
                 bar.setVisibility(View.VISIBLE);
             }
@@ -150,7 +149,6 @@ public class EnchantNotice extends Fragment {
         loadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //board.clear();
                 loadBoard();
             }
         });
@@ -171,7 +169,7 @@ public class EnchantNotice extends Fragment {
 
 
                 if (!Session.getCurrentSession().isOpened()) {
-                    Toast.makeText(getContext(), "비 로그인자는 글 작성을 할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "로그인된 사용자만 작성할 수 있습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -206,10 +204,29 @@ public class EnchantNotice extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        if (imgPath == null) return;
+                        if (imgPath == null) {
+                            Toast.makeText(getContext(), "사진을 첨부하세요.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                        if (edit_title.getText().toString().equals("") || edit_content.getText().toString().equals("")) {
-                            Toast.makeText(getContext(), "필수 항목을 입력해주세요", Toast.LENGTH_SHORT).show();
+
+                        if (edit_title.getText().toString().equals("")) {
+                            Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (edit_title.getText().toString().length() < 3) {
+                            Toast.makeText(getContext(), "제목은 2글자 이상으로 작성 해주십시오.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (edit_content.getText().toString().equals("")) {
+                            Toast.makeText(getContext(), "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (edit_content.getText().toString().length() < 5) {
+                            Toast.makeText(getContext(), "내용은 5글자 이상으로 해주세요.", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -220,14 +237,11 @@ public class EnchantNotice extends Fragment {
                         SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, insertBoardUrl, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
                                 handler.sendEmptyMessageDelayed(0, 100);
-
                             }
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-
                                 Toast.makeText(getContext(), "에러", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -238,6 +252,8 @@ public class EnchantNotice extends Fragment {
                         smpr.addFile("upload", imgPath);
                         queue.add(smpr);
 
+                        imgPath = null;
+
 
                         dialog.dismiss();
 
@@ -246,7 +262,9 @@ public class EnchantNotice extends Fragment {
 
 
                 pickup = (ImageView) view.findViewById(R.id.edit_img);
-                pickup.setOnClickListener(new View.OnClickListener() {
+                pickup.setOnClickListener(new View.OnClickListener()
+
+                {
                     @Override
                     public void onClick(View v) {
                         pickup.setClickable(false);

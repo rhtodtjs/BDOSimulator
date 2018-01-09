@@ -175,5 +175,35 @@ public class EnchantItem {
         if (nowGrade >= 17) nowGrade--;
     }
 
+    public void setDie(){
+        this.setImgUrl("null");
+        this.setGrade(0);
+        this.setMaxGrade(0);
+        this.setMinDMG(0);
+        this.setMaxDMG(0);
+        this.setSubType("null");
+        this.setNowGrade(0);
+        this.setBaseAp(0);
+        this.maxDMG = 0;
+        this.minDMG = 0;
+        this.itemId = 0;
+
+    }
+
+    public void setDie(int a){
+        this.setImgUrl("null");
+        this.setGrade(0);
+        this.setMaxGrade(0);
+        this.setMinDMG(0);
+        this.setMaxDMG(0);
+        this.setSubType("null");
+        this.setNowGrade(0);
+        this.setBaseAp(0);
+        this.maxDMG = 0;
+        this.minDMG = 0;
+        this.itemId = 0;
+
+    }
+
 
 }

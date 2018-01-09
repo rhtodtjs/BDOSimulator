@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
 import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.Random;
@@ -128,20 +129,13 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         mainView = inflater.inflate(R.layout.fragment_enchant_first, container, false);
-
-
         db = SQLiteDatabase.openOrCreateDatabase("data/data/com.kkk8888.bdosimulator/databases/itemlist.db", null);
-
         settingView(mainView);
-
         loadSave();
-
         return mainView;
 
     }
-
 
     void settingView(View view) {
         searchView = (SearchView) view.findViewById(R.id.searchBtn);
@@ -268,8 +262,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         int ap = 0, dp = 0, wap = 0;
         int pri = 0;
         int awake = 0;
-
-
         ImageView img = null;
         for (int i = 0; i < viewList.length; i++) {
             img = (ImageView) mainView.findViewById(viewList[i]);
@@ -284,7 +276,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             } else if (item.getItemType().equals("W_AWAKE")) {
                 awake = item.getMaxDMG();
             }
-
         }
 
         wap -= pri;
@@ -293,7 +284,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
         ints[0] = ap;
         ints[1] = dp;
         ints[2] = wap;
-
 
         return ints;
 
@@ -364,7 +354,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
             }
 
-            //Log.i("제이슨", sb.toString());
 
             Gson gson = new Gson();
 
@@ -965,9 +954,9 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             Button delete = (Button) dialogView.findViewById(R.id.detail_delete);
             TextView panel = (TextView) dialogView.findViewById(R.id.detail_panel);
             final EditText grade = (EditText) dialogView.findViewById(R.id.detail_grade);
-            grade.setText(enchantItem.getNowGrade()+"");
+            grade.setText(enchantItem.getNowGrade() + "");
             //e o FindView
-            panel.setText("현재 강화 등급 (  MAX " + enchantItem.getMaxGrade() + ") :");
+            panel.setText("현재 강화 등급 (MAX" + enchantItem.getMaxGrade() + ") :");
             grade.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -975,11 +964,11 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if(charSequence.toString().equals("")) return;
-                    if(Integer.parseInt(charSequence.toString()) > enchantItem.getMaxGrade()){
+                    if (charSequence.toString().equals("")) return;
+                    if (Integer.parseInt(charSequence.toString()) > enchantItem.getMaxGrade()) {
                         Toast.makeText(getContext(), "최대 등급을 넘을 수 없습니다.", Toast.LENGTH_SHORT).show();
-                        grade.setText(enchantItem.getMaxGrade()+"");
-                        mainActivity.handler.sendEmptyMessage(0);
+                        grade.setText(enchantItem.getMaxGrade() + "");
+
                         return;
                     }
 
@@ -996,6 +985,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
                     enchantItem.setNowGrade(Integer.parseInt(grade.getText().toString()));
                     reloadData(enchantItem);
                     saveData();
+                    mainActivity.handler.sendEmptyMessage(0);
                     dialog.dismiss();
 
                 }
@@ -1004,7 +994,12 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "DELETE", Toast.LENGTH_SHORT).show();
+                    enchantItem.setDie();
+                    reloadData(enchantItem);
+                    saveData();
+                    mainActivity.handler.sendEmptyMessage(0);
+                    dialog.dismiss();
+
                 }
             });
 
@@ -1417,7 +1412,6 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
         }
         int[] stat = new int[3];
-
 
         stat = initAllStat();
         setGrade();
@@ -2037,7 +2031,7 @@ public class EnchantFirst extends Fragment implements View.OnClickListener, View
 
     }
 
-    public void saveData(){
+    public void saveData() {
         Gson gson = new Gson();
 
         String dir = getActivity().getApplicationContext().getFilesDir().getPath();

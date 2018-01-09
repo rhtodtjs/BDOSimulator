@@ -319,6 +319,10 @@ public class EnchantActivity extends AppCompatActivity implements View.OnClickLi
                     ft = pagerAdapter.getItem(2).getFragmentManager().beginTransaction();
                     ft.detach(enchantSecond).attach(enchantSecond).commit();
                     break;
+                case 2:
+                    ft = pagerAdapter.getItem(2).getFragmentManager().beginTransaction();
+                    ft.detach(enchantSecond).attach(enchantSecond).commit();
+                    break;
             }
 
         }

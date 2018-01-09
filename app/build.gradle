@@ -5,7 +5,7 @@ android {
         release {
             keyAlias 'release1'
             keyPassword '8529731z'
-            storeFile file('E:/Android/Release/BDOSimulator/sign.jks')
+            storeFile file('D:/Android/Release/BDOSimulator/sign.jks')
             storePassword '8529731z'
         }
     }
@@ -15,8 +15,8 @@ android {
         applicationId "com.kkk8888.bdosimulator"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 18
-        versionName "2.7"
+        versionCode 19
+        versionName "2.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -26,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+
         debug {
             signingConfig signingConfigs.release
         }
