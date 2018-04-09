@@ -225,6 +225,16 @@ public class EnchantNotice extends Fragment {
                             return;
                         }
 
+                        if (edit_content.getText().toString().contains(";@ab@")) {
+                            Toast.makeText(getContext(), "잘못된 문자열이 포함되어있습니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if (edit_content.getText().toString().contains("&")) {
+                            Toast.makeText(getContext(), "잘못된 문자열이 포함되어있습니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         if (edit_content.getText().toString().length() < 5) {
                             Toast.makeText(getContext(), "내용은 5글자 이상으로 해주세요.", Toast.LENGTH_SHORT).show();
                             return;
@@ -380,7 +390,7 @@ public class EnchantNotice extends Fragment {
             @Override
             public void onResponse(String response) {
                 //Log.i("로그", response);
-                String[] strs = response.split(";");
+                String[] strs = response.split(";@ab@");
 
 
                 for (int i = 0; i < strs.length; i++) {
@@ -396,7 +406,6 @@ public class EnchantNotice extends Fragment {
 
                     }
 
-                    //Log.i("시발",unitStrs[i]);
                 }
 
 

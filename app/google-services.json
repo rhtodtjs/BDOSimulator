@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "337500674970",
+    "firebase_url": "https://bdosimulator.firebaseio.com",
+    "project_id": "bdosimulator",
+    "storage_bucket": "bdosimulator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337500674970:android:d3957fb694eb27f5",
+        "android_client_info": {
+          "package_name": "com.kkk8888.bdosimulator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337500674970-aelu3pkkvcnpquo83msjmajnr09opd7t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kkk8888.bdosimulator",
+            "certificate_hash": "c78b8a7257211bb5f3f65af0511ac577f5cead44"
+          }
+        },
+        {
+          "client_id": "337500674970-057mmf0fnuva0ocsid3faiukpu311d8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8hV2_4ihzqr3cY98CSizSzJZkaMRZLj8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337500674970-057mmf0fnuva0ocsid3faiukpu311d8f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

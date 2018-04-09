@@ -32,7 +32,7 @@ public class BoardItem {
         this.GM = GM;
     }
 
-    public BoardItem(String writer, String text, String content, String imgUrl , String GM) {
+    public BoardItem(String writer, String text, String content, String imgUrl, String GM) {
         this.writer = writer;
         this.text = text;
         this.content = content;
